@@ -1,8 +1,14 @@
 const mongoose = require('mongoose')
 
 const DoctorSchema = new mongoose.Schema({
-    Doctorname: String,
-    Doctorid: Number
+    Doctorname: {
+        type: String,
+        required: true
+    },
+    Doctorid: {
+        type: String,
+        required: true
+    }
 
 })
 const DoctorModel = mongoose.model('doctor', DoctorSchema)
