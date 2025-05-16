@@ -16,3 +16,4 @@ router.post('/patient_signup', async (req, res) => {
     }
 })
 
+module.exports = router
