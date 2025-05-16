@@ -1,6 +1,7 @@
 const express = require('express')
 const AdminModel = require('../model/admin')
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 
 router.post('/admin_signup', async (req, res) => {
@@ -16,7 +17,7 @@ router.post('/admin_signup', async (req, res) => {
     }
 })
 
-router.post('/adminlogin', async (req, res) => {
+router.post('/admin_login', async (req, res) => {
 
     try {
         let admin = req.body;
@@ -26,7 +27,7 @@ router.post('/adminlogin', async (req, res) => {
 
         const token = await jwt.sign({ admin: adminExist }, 'adminauth');
         res.json({
-            user: adminExist,
+            admin: adminExist,
             token
         })
     } catch (error) {

@@ -15,5 +15,22 @@ router.post('/patient_signup', async (req, res) => {
         res.status(500).send(error?.message)
     }
 })
+router.post('/patient_login', async (req, res) => {
+    try {
+        let patient = req.body;
+        const patientExist = await PatientModel.findOne({ Patientname: patient?.Patientname })
+        if (!patientExist) return res.status(401).send("patient not exist")
+        if (patientExist?.Patientid !== patient?.Patientid) res.status(401).send("Invalid id")
+
+        const token = await jwt.sign({ patient: patientExist }, 'patientauth');
+        res.json({
+            patient: patientExist,
+            token
+        })
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+})
+
 
 module.exports = router

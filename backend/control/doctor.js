@@ -21,7 +21,7 @@ router.post('/doctor_signup', async (req, res) => {
 
 
 
-router.post('/login', async (req, res) => {
+router.post('/doctor_login', async (req, res) => {
 
     try {
         let doctor = req.body;
@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
 
         const token = await jwt.sign({ doctor: doctorExist }, 'doctorauth');
         res.json({
-            user: doctorExist,
+            doctor: doctorExist,
             token
         })
     } catch (error) {
