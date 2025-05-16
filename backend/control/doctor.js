@@ -4,9 +4,12 @@ const router = express.Router();
 
 
 
-router.post('/doctor', async (req, res) => {
+router.post('/signup', async (req, res) => {
+
     try {
         let doctor = req.body;
+        const isAlreadyExist = await DoctorModel.findOne({ Doctorname: doctor?.Doctorname })
+        if (isAlreadyExist) return res.status(401).send("doctor already exist")
         const createdoctor = await DoctorModel.create(doctor)
         res.json(createdoctor)
         console.log("doctor", createdoctor)
