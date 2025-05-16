@@ -1,6 +1,7 @@
 const express = require('express')
 const PatientModel = require('../model/patient')
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 
 router.post('/patient_signup', async (req, res) => {
