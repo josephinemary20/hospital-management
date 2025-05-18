@@ -30,7 +30,7 @@ export default function Doctor() {
                 <input onChange={e => setDoctorname(e.target.value)} value={doctorname || ''} placeholder="Doctorname" />
             </div>
             <div className="mt-3">
-                <input onchange={e => setDoctorid(e.target.value)} value={doctorid || ''} placeholder="Doctorid" />
+                <input onChange={e => setDoctorid(e.target.value)} value={doctorid || ''} placeholder="Doctorid" />
 
             </div>
             <div className="mt-3">
