@@ -24,7 +24,7 @@ export default function Patient() {
     return <div>
         <form onSubmit={onSubmit}>
             <div>
-                <h3>DOCTOR SIGNUP</h3>
+                <h3>PATIENT SIGNUP</h3>
             </div>
             <div className="mt-3">
                 <input onChange={e => setPatientname(e.target.value)} value={patientname || ''} placeholder="Patientname" />
