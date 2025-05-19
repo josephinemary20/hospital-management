@@ -2,16 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Patient() {
-    const [patientname, setPatientname] = useState('')
-    const [patientid, setPatientid] = useState('')
+    const [Patientname, setPatientname] = useState('')
+    const [Patientid, setPatientid] = useState('')
 
     const postpatient = () => {
-        let url = 'http://localhost:6000/patient_signup';
-        let method = 'post';
-        axios[method](url, { Patientname: patientname, Patientid: patientid })
-            .then(res => {
-                console.log('patientsignup', res)
-            })
+        axios.post('http://localhost:2000/patient_signup', { Patientname, Patientid }).then(res => {
+            console.log('patientsignup', res)
+        })
     }
 
 
@@ -27,10 +24,10 @@ export default function Patient() {
                 <h3>PATIENT SIGNUP</h3>
             </div>
             <div className="mt-3">
-                <input onChange={e => setPatientname(e.target.value)} value={patientname || ''} placeholder="Patientname" />
+                <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" />
             </div>
             <div className="mt-3">
-                <input onChange={e => setPatientid(e.target.value)} value={patientid || ''} placeholder="Patientid" />
+                <input onChange={e => setPatientid(e.target.value)} value={Patientid || ''} placeholder="Patientid" />
 
             </div>
             <div className="mt-3">

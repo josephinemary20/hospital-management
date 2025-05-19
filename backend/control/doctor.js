@@ -13,7 +13,6 @@ router.post('/doctor_signup', async (req, res) => {
         if (isAlreadyExist) return res.status(401).send("doctor already exist")
         const createdoctor = await DoctorModel.create(doctor)
         res.json(createdoctor)
-        console.log("doctor", createdoctor)
     } catch (error) {
         res.status(500).send(error?.message)
     }

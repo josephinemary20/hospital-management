@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 export default function Home() {
     let navigate = useNavigate();
-    return <div className="text-center" >
+    return <div className="text-center vh-100" style={{
+        backgroundImage: `url("")`
+    }} >
         <div className="mt-5">
             <h1 className="text-primary">WELCOME TO ASHIQ HOSPITAL</h1>
         </div>
@@ -10,6 +12,9 @@ export default function Home() {
         </div>
         <div className="mt-5">
             <button className=" btn bg-danger " onClick={() => navigate('/patient')} >Patientsignup</button>
+        </div>
+        <div className="mt-5">
+            <button className=" btn bg-danger " onClick={() => navigate('/admin')} >Adminsignup</button>
         </div>
     </div>
 
