@@ -18,7 +18,7 @@ export default function Admin() {
 
     };
 
-    return <div>
+    return <div className="text-center">
         <form onSubmit={onSubmit}>
             <div>
                 <h3>ADMIN SIGNUP</h3>

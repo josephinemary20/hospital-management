@@ -18,9 +18,9 @@ export default function Patient() {
 
     };
 
-    return <div>
+    return <div className=" text-center">
         <form onSubmit={onSubmit}>
-            <div>
+            <div >
                 <h3>PATIENT SIGNUP</h3>
             </div>
             <div className="mt-3">

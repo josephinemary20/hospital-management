@@ -5,6 +5,7 @@ import Doctor from "./doctor"
 import Patient from "./patient"
 import Admin from "./admin"
 
+
 export default function Nestedrouter() {
     return <div>
         <HashRouter>
@@ -13,6 +14,7 @@ export default function Nestedrouter() {
                 <Route path='/doctor' element={<Doctor />} />
                 <Route path='/patient' element={<Patient />} />
                 <Route path='/admin' element={<Admin />} />
+
             </Routes>
         </HashRouter>
     </div>
