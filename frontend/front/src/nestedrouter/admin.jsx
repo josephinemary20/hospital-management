@@ -5,21 +5,24 @@ export default function Admin() {
     const [Adminname, setAdminname] = useState('')
     const [Adminid, setAdminid] = useState('')
 
-    const postadmin = () => {
+    const adminsignup = () => {
         axios.post('http://localhost:2000/admin_signup', { Adminname, Adminid }).then(res => {
             console.log('adminsignup', res)
         })
     }
 
+    const adminLogin = () => {
+        axios.post('http://localhost:2000/admin_login', { Adminname, Adminid })
+            .then(res => {
+                axiosInstance.defaults.headers['token'] = res.data?.token
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        postadmin();
+                localStorage.setItem('token', res.data?.token)
+            })
+    }
 
-    };
 
     return <div className="text-center">
-        <form onSubmit={onSubmit}>
+        <form >
             <div>
                 <h3>ADMIN SIGNUP</h3>
             </div>
@@ -31,7 +34,10 @@ export default function Admin() {
 
             </div>
             <div className="mt-3">
-                <button type="submit">Submit</button>
+                <button onClick={adminsignup}>SIGNUP</button>
+            </div>
+            <div className="mt-3">
+                <button onClick={adminLogin}>LOGIN</button>
             </div>
         </form>
 
