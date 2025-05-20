@@ -18,8 +18,7 @@ export default function Admin() {
         axios.post('http://localhost:2000/admin_login', { Adminname, Adminid })
             .then(res => {
                 axiosInstance.defaults.headers['token'] = res.data?.token
-
-                localStorage.setItem('token', res.data?.token)
+                localStorage.setItem('admintoken', res.data?.token)
                 navigate('/admindashbord')
             })
     }

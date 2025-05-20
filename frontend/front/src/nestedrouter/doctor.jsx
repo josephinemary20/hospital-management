@@ -20,7 +20,7 @@ export default function Doctor() {
         axios.post('http://localhost:2000/doctor_login', { Doctorname, Doctorid })
             .then(res => {
                 axiosInstance.defaults.headers['token'] = res.data?.token
-                localStorage.setItem('token', res.data?.token)
+                localStorage.setItem('doctortoken', res.data?.token)
                 navigate('/doctordashbord')
             })
     }

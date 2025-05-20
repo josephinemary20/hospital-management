@@ -9,7 +9,7 @@ export default function Doctordashbord() {
 
     return <div className="text-center">
         <div className="mt-3">
-            <Link >VIEW UPCOMING APPOINTMENT</Link>
+            <Link to={'/appointment'} >VIEW UPCOMING APPOINTMENT</Link>
         </div>
         <div className="mt-3">
             <Link>ADD PRESCRIPTION TO PATIENT</Link>
