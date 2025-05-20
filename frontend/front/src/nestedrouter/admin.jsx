@@ -1,9 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../axiosinstance/axiosinstance";
 
 export default function Admin() {
     const [Adminname, setAdminname] = useState('')
     const [Adminid, setAdminid] = useState('')
+    let navigate = useNavigate();
 
     const adminsignup = () => {
         axios.post('http://localhost:2000/admin_signup', { Adminname, Adminid }).then(res => {
@@ -17,6 +20,7 @@ export default function Admin() {
                 axiosInstance.defaults.headers['token'] = res.data?.token
 
                 localStorage.setItem('token', res.data?.token)
+                navigate('/admindashbord')
             })
     }
 

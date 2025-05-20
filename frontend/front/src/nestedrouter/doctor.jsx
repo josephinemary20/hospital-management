@@ -1,11 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosinstance/axiosinstance";
 
 export default function Doctor() {
     const [Doctorname, setDoctorname] = useState('')
     const [Doctorid, setDoctorid] = useState('')
+    let navigate = useNavigate();
 
     const doctorsignup = () => {
         axios.post('http://localhost:2000/doctor_signup', { Doctorname, Doctorid }).then(res => {
@@ -19,8 +20,8 @@ export default function Doctor() {
         axios.post('http://localhost:2000/doctor_login', { Doctorname, Doctorid })
             .then(res => {
                 axiosInstance.defaults.headers['token'] = res.data?.token
-
                 localStorage.setItem('token', res.data?.token)
+                navigate('/doctordashbord')
             })
     }
 
@@ -42,7 +43,7 @@ export default function Doctor() {
                 <button onClick={doctorsignup}>SIGNUP</button>
             </div>
             <div className="mt-3">
-                <button onClick={doctorLogin}>LOGIN</button>
+                <button onClick={doctorLogin} >LOGIN</button>
             </div>
         </form>
 

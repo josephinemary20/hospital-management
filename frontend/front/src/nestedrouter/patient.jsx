@@ -1,11 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import axiosInstance from "../axiosinstance/axiosinstance";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Patient() {
+
     const [Patientname, setPatientname] = useState('')
     const [Patientid, setPatientid] = useState('')
+    let navigate = useNavigate();
 
     const patientsignup = () => {
         axios.post('http://localhost:2000/patient_signup', { Patientname, Patientid }).then(res => {
@@ -19,6 +22,7 @@ export default function Patient() {
                 axiosInstance.defaults.headers['token'] = res.data?.token
 
                 localStorage.setItem('token', res.data?.token)
+                navigate('/patientdashbord')
             })
     }
 
