@@ -5,7 +5,7 @@ const AppointmentSchema = new mongoose.Schema({
         type: Date,
     },
     Time: {
-        type: Number,
+        type: String,
     },
     Reason: {
         type: String

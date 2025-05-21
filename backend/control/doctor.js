@@ -38,4 +38,9 @@ router.post('/doctor_login', async (req, res) => {
     }
 })
 
+router.get('/doctor_get', async (req, res) => {
+    let doctor = await DoctorModel.find();
+    res.json(doctor)
+})
+
 module.exports = router;

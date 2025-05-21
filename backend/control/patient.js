@@ -32,6 +32,10 @@ router.post('/patient_login', async (req, res) => {
         res.status(500).send(error.message)
     }
 })
+router.get('/patient_get', async (req, res) => {
+    let patient = await PatientModel.find();
+    res.json(patient)
+})
 
 
 module.exports = router

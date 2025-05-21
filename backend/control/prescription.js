@@ -31,3 +31,5 @@ router.delete('/pres_delete/:id', async (req, res) => {
     await PrescriptionModel.findByIdAndDelete(id)
     res.json("deleted")
 })
+
+module.exports = router;

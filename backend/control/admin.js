@@ -35,6 +35,11 @@ router.post('/admin_login', async (req, res) => {
     }
 })
 
+router.get('/admin_get', async (req, res) => {
+    let admin = await AdminModel.find();
+    res.json(admin)
+})
+
 
 
 module.exports = router

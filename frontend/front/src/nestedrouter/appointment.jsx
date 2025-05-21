@@ -1,61 +1,60 @@
-import { useState } from "react"
-import axios from 'axios'
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Appointment() {
-    const [Date, setDate] = useState('')
-    const [Time, setTime] = useState('')
-    const [Reason, setReason] = useState('')
-    const [patient_id, setPatient_id] = useState('')
-    const [doctor_id, setDoctor_id] = useState('')
+    const [appointments, setAppointments] = useState([]);
+    const [doctors, setDoctors] = useState({});
+    const [patients, setPatients] = useState({});
 
-    const createAppoint = () => {
-        axios.post('http://localhost:2000/appoint', { Date, Time, Reason, patient_id, doctor_id })
-            .then(res => {
-            })
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
 
-    }
-
-    const Submit = e => {
-        e.preventDefault()
-        createAppoint();
-    }
+                const [appointmentsRes, doctorsRes, patientsRes] = await Promise.all([
+                    axios.get('http://localhost:2000/appoint_get'),
+                    axios.get('http://localhost:2000/doctor_get'),
+                    axios.get('http://localhost:2000/patient_get'),
+                ]);
 
 
+                const doctorMap = {};
+                doctorsRes.data.forEach(doctor => {
+                    doctorMap[doctor._id] = doctor.Doctorname;
+                });
 
-    return <div className="text-center">
-        <form onSubmit={Submit}>
-            <div className="mt-3">
-                <input onChange={e => setDate(e.target.value)} value={Date || ''} placeholder="Date" />
-            </div>
-            <div className="mt-3">
-                <input onChange={e => setTime(e.target.value)} value={Time || ''} placeholder="Time" />
-            </div>
-            <div className="mt-3">
-                <input onChange={e => setReason(e.target.value)} value={Reason || ''} placeholder="Reason" />
-            </div>
-            <div className="mt-3">
-                <select onChange={e => setPatient_id(e.target.value)} value={patient_id}  >
-                    <option>select patientid</option>
+                const patientMap = {};
+                patientsRes.data.forEach(patient => {
+                    patientMap[patient._id] = patient.Patientname;
+                });
 
-                </select>
-            </div>
-            <div className="mt-3">
-                <select onChange={e => setPatient_id(e.target.value)} value={patient_id}  >
-                    <option>select patientname</option>
 
-                </select>
-            </div>
+                const fetchedAppointments = appointmentsRes.data.map(appointment => ({
+                    ...appointment,
+                    doctorName: doctorMap[appointment.doctor_id] || 'Unknown Doctor',
+                    patientName: patientMap[appointment.patient_id] || 'Unknown Patient',
+                }));
 
-            <div className="mt-3">
-                <select onChange={e => setDoctor_id(e.target.value)} value={doctor_id} >
-                    <option>select doctorname</option>
+                setAppointments(fetchedAppointments);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
 
-                </select>
-            </div>
-            <div className="mt-3">
-                <button>submit</button>
-            </div>
-        </form>
+        fetchData();
+    }, []);
 
-    </div>
+    return (
+        <div className="text-center">
+            <ul>
+                {appointments.map(appointment => (
+                    <li key={appointment._id}>
+                        {appointment.Date} {appointment.Time}-{appointment.Reason}- {appointment.doctorName}-{appointment.patientName}<br />
+
+                    </li>
+                ))}
+            </ul>
+            <Link to={'/doctordashbord'}>GO BACK</Link>
+        </div>
+    );
 }

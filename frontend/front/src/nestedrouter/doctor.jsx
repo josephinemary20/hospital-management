@@ -6,6 +6,7 @@ import axiosInstance from "../axiosinstance/axiosinstance";
 export default function Doctor() {
     const [Doctorname, setDoctorname] = useState('')
     const [Doctorid, setDoctorid] = useState('')
+
     let navigate = useNavigate();
 
     const doctorsignup = () => {
@@ -24,6 +25,7 @@ export default function Doctor() {
                 navigate('/doctordashbord')
             })
     }
+
 
 
     return <div className="text-center">

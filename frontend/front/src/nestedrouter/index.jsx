@@ -15,23 +15,18 @@ import Appointment from "./appointment"
 
 export default function Nestedrouter() {
     const navigate = useNavigate();
-    const checkDoctor = async () => {
 
+    const checkToken = async () => {
         let doctortoken = await localStorage.getItem('doctortoken')
+        let admintoken = await localStorage.getItem('admintoken')
+        let patienttoken = await localStorage.getItem('patienttoken')
         if (doctortoken) {
             axiosInstance.defaults.headers['token'] = doctortoken
             navigate('/doctordashbord')
-        }
-
-
-        let admintoken = await localStorage.getItem('admintoken')
-        if (admintoken) {
+        } else if (admintoken) {
             axiosInstance.defaults.headers['token'] = admintoken
             navigate('/admindashbord')
-        }
-
-        let patienttoken = await localStorage.getItem('patienttoken')
-        if (patienttoken) {
+        } else if (patienttoken) {
             axiosInstance.defaults.headers['token'] = patienttoken
             navigate('/patientdashbord')
         }
@@ -39,14 +34,6 @@ export default function Nestedrouter() {
     }
 
 
-
-    /*const checkPatient = async () => {
-        let token = await localStorage.getItem('patienttoken')
-        if (token) {
-            axiosInstance.defaults.headers['token'] = token
-            navigate('/patientdashbord')
-        }
-    };*/
 
     const ProtectRoute = () => {
         let token = localStorage.getItem('doctortoken')
@@ -64,9 +51,8 @@ export default function Nestedrouter() {
 
 
     useEffect(() => {
-        checkDoctor();
-        // checkAdmin();
-        //checkPatient();
+        checkToken();
+
     }, [])
     return <div>
         <Routes>
@@ -77,12 +63,12 @@ export default function Nestedrouter() {
             <Route element={<ProtectRoute />} >
                 <Route path='/doctordashbord' element={<Doctordashbord />} />
                 <Route path='/appointment' element={<Appointment />} />
-                <Route element={<Protectpatient />} >
-                    <Route path='/patientdashbord' element={<Patientdashbord />} />
-                </Route>
-                <Route element={<Protectadmin />} >
-                    <Route path='/admindashbord' element={<Admindashbord />} />
-                </Route>
+            </Route>
+            <Route element={<Protectpatient />} >
+                <Route path='/patientdashbord' element={<Patientdashbord />} />
+            </Route>
+            <Route element={<Protectadmin />} >
+                <Route path='/admindashbord' element={<Admindashbord />} />
             </Route>
 
 
