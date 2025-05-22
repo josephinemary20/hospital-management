@@ -11,7 +11,7 @@ export default function Appointment() {
         const fetchData = async () => {
             try {
 
-                const [appointmentsRes, doctorsRes, patientsRes] = await Promise.all([
+                const [appointmentsdata, doctorsdata, patientsdata] = await Promise.all([
                     axios.get('http://localhost:2000/appoint_get'),
                     axios.get('http://localhost:2000/doctor_get'),
                     axios.get('http://localhost:2000/patient_get'),
@@ -19,17 +19,17 @@ export default function Appointment() {
 
 
                 const doctorMap = {};
-                doctorsRes.data.forEach(doctor => {
+                doctorsdata.data.forEach(doctor => {
                     doctorMap[doctor._id] = doctor.Doctorname;
                 });
 
                 const patientMap = {};
-                patientsRes.data.forEach(patient => {
+                patientsdata.data.forEach(patient => {
                     patientMap[patient._id] = patient.Patientname;
                 });
 
 
-                const fetchedAppointments = appointmentsRes.data.map(appointment => ({
+                const fetchedAppointments = appointmentsdata.data.map(appointment => ({
                     ...appointment,
                     doctorName: doctorMap[appointment.doctor_id] || 'Unknown Doctor',
                     patientName: patientMap[appointment.patient_id] || 'Unknown Patient',
@@ -37,7 +37,7 @@ export default function Appointment() {
 
                 setAppointments(fetchedAppointments);
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error(" fetching appointment data:", error);
             }
         };
 
@@ -46,14 +46,14 @@ export default function Appointment() {
 
     return (
         <div className="text-center">
-            <ul>
+            <ol>
                 {appointments.map(appointment => (
                     <li key={appointment._id}>
-                        {appointment.Date} {appointment.Time}-{appointment.Reason}- {appointment.doctorName}-{appointment.patientName}<br />
+                        {appointment.Date}- {appointment.Time}-{appointment.Reason}- {appointment.doctorName}-{appointment.patientName}<br />
 
                     </li>
                 ))}
-            </ul>
+            </ol>
             <Link to={'/doctordashbord'}>GO BACK</Link>
         </div>
     );

@@ -5,14 +5,18 @@ import axios from 'axios'
 import axiosInstance from "../axiosinstance/axiosinstance"
 
 export default function Doctordashbord() {
-
-    const [Date, setDate] = useState()
+    // appointment
+    const [Date, setDate] = useState('')
     const [Time, setTime] = useState('')
     const [Reason, setReason] = useState('')
     const [patient_id, setPatient_id] = useState()
     const [patientlist, setPatientlist] = useState([])
     const [doctor_id, setDoctor_id] = useState()
     const [doctorlist, setDoctorlist] = useState([])
+    // prescription
+    const [Medicine, setMedicine] = useState('')
+    const [Dosage, setDosage] = useState('')
+
 
     const createAppoint = () => {
         axiosInstance.post('http://localhost:2000/appoint', { Date, Time, Reason, patient_id, doctor_id }).then(res => {
@@ -44,6 +48,17 @@ export default function Doctordashbord() {
         getpatient();
 
     }, [])
+
+    const createPres = () => {
+        axiosInstance.post('http://localhost:2000/pres', { Medicine, Dosage, patient_id }).then(res => {
+
+        })
+    }
+
+    const Submitpres = e => {
+        e.preventDefault()
+        createPres();
+    }
 
 
 
@@ -96,8 +111,32 @@ export default function Doctordashbord() {
         <div className="mt-3">
             <Link to={'/appointment'} >VIEW UPCOMING APPOINTMENT</Link>
         </div>
+        <form onSubmit={Submitpres}>
+            <div className="mt-3">
+                <select onChange={e => setPatient_id(e.target.value)} value={patient_id}  >
+                    <option>select patientname</option>
+
+                    {
+                        patientlist.map((patient) => <option key={patient._id} value={patient._id}>{patient.Patientname}</option>)
+                    }
+
+                </select>
+            </div>
+            <div className="mt-3">
+                <input onChange={e => setMedicine(e.target.value)} value={Medicine || ''} placeholder="Medicine" />
+            </div>
+            <div className="mt-3">
+                <input onChange={e => setDosage(e.target.value)} value={Dosage || ''} placeholder="Dosage" />
+            </div>
+
+            <div className="mt-3">
+                <button>submit</button>
+            </div>
+
+
+        </form>
         <div className="mt-3">
-            <Link>ADD PRESCRIPTION TO PATIENT</Link>
+            <Link to={'/prescription'}>ADD PRESCRIPTION TO PATIENT</Link>
         </div>
         <div className="mt-3">
             <Link>VIEW PATIENT HISTORY</Link>
