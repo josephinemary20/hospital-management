@@ -46,6 +46,7 @@ export default function Appointment() {
 
     return (
         <div className="text-center">
+            <h2 className="mb-3">Appointments</h2>
             <ol>
                 {appointments.map(appointment => (
                     <li key={appointment._id}>

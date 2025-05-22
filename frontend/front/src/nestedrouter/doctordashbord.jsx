@@ -139,7 +139,7 @@ export default function Doctordashbord() {
             <Link to={'/prescription'}>ADD PRESCRIPTION TO PATIENT</Link>
         </div>
         <div className="mt-3">
-            <Link>VIEW PATIENT HISTORY</Link>
+            <Link to={'/patienthistory'}>VIEW PATIENT HISTORY</Link>
         </div>
         <div className="mt-3">
             <button className=" btn bg-danger" onClick={logout}>LOGOUT</button>
