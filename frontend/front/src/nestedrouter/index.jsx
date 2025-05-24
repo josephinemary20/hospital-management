@@ -12,6 +12,10 @@ import Patientdashbord from "./patientdashbord"
 import Appointment from "./appointment"
 import Prescription from "./prescription"
 import Patienthistory from "./patienthistory"
+import Bookappoint from "./bookappoint"
+import Patientprescription from "./patientprescription"
+import Appointmentdashbord from "./appointmentdashbord"
+import Slot from "./slot"
 
 
 
@@ -70,9 +74,13 @@ export default function Nestedrouter() {
             </Route>
             <Route element={<Protectpatient />} >
                 <Route path='/patientdashbord' element={<Patientdashbord />} />
+                <Route path='/bookappoint' element={< Bookappoint />} />
+                <Route path='patientprescription' element={<Patientprescription />} />
             </Route>
             <Route element={<Protectadmin />} >
                 <Route path='/admindashbord' element={<Admindashbord />} />
+                <Route path='/appointmentdashbord' element={<Appointmentdashbord />} />
+                <Route path='/slot' element={<Slot />} />
             </Route>
 
 

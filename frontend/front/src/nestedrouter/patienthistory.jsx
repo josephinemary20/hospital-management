@@ -1,42 +1,57 @@
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Patienthistory() {
-    const [patienthistory, setPatienthistory] = useState([]);
+    const [appointments, setAppointments] = useState([]);
+    const [prescriptions, setPrescriptions] = useState([]);
+    const [patientsMap, setPatientsMap] = useState({});
+    const [doctorsMap, setDoctorsMap] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const [
-                    prescriptions,
-                    appointments,
-                    doctors,
-                    patientsList
+                    appointmentsRes,
+                    prescriptionsRes,
+                    patientsRes,
+                    doctorsRes
                 ] = await Promise.all([
-                    axios.get('http://localhost:2000/pres_get'),
-                    axios.get('http://localhost:2000/appoint_get'),
-                    axios.get('http://localhost:2000/doctor_get'),
-                    axios.get('http://localhost:2000/patient_get'),
+                    axios.get("http://localhost:2000/appoint_get"),
+                    axios.get("http://localhost:2000/pres_get"),
+                    axios.get("http://localhost:2000/patient_get"),
+                    axios.get("http://localhost:2000/doctor_get")
                 ]);
 
-                const doctorMap = {};
-                doctors.data.forEach(doctor => {
-                    doctorMap[doctor._id] = doctor.Doctorname;
-                });
-
+                // Build patient and doctor maps
                 const patientMap = {};
-                patientsList.data.forEach(patient => {
+                patientsRes.data.forEach(patient => {
                     patientMap[patient._id] = patient.Patientname;
                 });
 
-                const fetchedPatienthistory = prescriptions.data.map(history => ({
-                    ...history,
-                    doctorName: doctorMap[history.doctor_id] || 'Unknown Doctor',
-                    patientName: patientMap[history.patient_id] || 'Unknown Patient',
+                const doctorMap = {};
+                doctorsRes.data.forEach(doctor => {
+                    doctorMap[doctor._id] = doctor.Doctorname;
+                });
+
+                // Map appointment data
+                const mappedAppointments = appointmentsRes.data.map(app => ({
+                    ...app,
+                    doctorName: doctorMap[app.doctor_id] || "Unknown Doctor",
+                    patientName: patientMap[app.patient_id] || "Unknown Patient"
                 }));
 
-                setPatienthistory(fetchedPatienthistory);
+                // Map prescription data
+                const mappedPrescriptions = prescriptionsRes.data.map(pres => ({
+                    ...pres,
+                    patientName: patientMap[pres.patient_id] || "Unknown Patient"
+                }));
+
+                // Set states
+                setDoctorsMap(doctorMap);
+                setPatientsMap(patientMap);
+                setAppointments(mappedAppointments);
+                setPrescriptions(mappedPrescriptions);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -46,16 +61,26 @@ export default function Patienthistory() {
     }, []);
 
     return (
-        <div className="text-center p-4">
-            <h2 className="mb-4">Patient History</h2>
+        <div className="text-center">
+            <h2 className="mb-3">Appointments</h2>
             <ol>
-                {patienthistory.map(history => (
-                    <li key={history._id}>
-                        {history.Date} - {history.Reason} - {history.doctorName} - {history.patientName} - {history.Medicine} - {history.Dosage}
+                {appointments.map(appointment => (
+                    <li key={appointment._id}>
+                        {appointment.Date} - {appointment.Time} - {appointment.Reason} - {appointment.doctorName} - {appointment.patientName}
                     </li>
                 ))}
             </ol>
-            <Link to="/doctordashboard">GO BACK</Link>
+
+            <h2 className="mb-4">Prescriptions</h2>
+            <ol>
+                {prescriptions.map(prescription => (
+                    <li key={prescription._id}>
+                        {prescription.patientName} - {prescription.Medicine} - {prescription.Dosage}
+                    </li>
+                ))}
+            </ol>
+
+            <Link to="/doctordashbord">GO BACK</Link>
         </div>
     );
 }

@@ -5,8 +5,11 @@ export default function Admindashbord() {
         localStorage.clear()
         navigate('/')
     }
-    return <div>
-        <h1>adminpage</h1>
+    return <div className="text-center">
+        <div className="mt-3">
+            <button className="btn btn-primary" onClick={() => navigate('/appointmentdashbord')}>APPOINTMENT MANAGEMENT</button>
+        </div>
+
         <div className="mt-3">
             <button className="btn btn-danger" onClick={logout}>LOGOUT</button>
         </div>
