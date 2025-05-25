@@ -9,6 +9,9 @@ const SlotSchema = new mongoose.Schema({
     Slotduration: {
         type: String,
     },
+    Availabledate: {
+        type: Date,
+    },
     department_id: {
         ref: "department",
         type: mongoose.Schema.Types.ObjectId

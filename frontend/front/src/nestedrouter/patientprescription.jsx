@@ -42,7 +42,7 @@ export default function Patientprescription() {
                     </li>
                 ))}
             </ol>
-            <Link to={'/doctordashbord'}>GO BACK</Link>
+            <Link to={'/patientdashbord'}>GO BACK</Link>
         </div>
     );
 }

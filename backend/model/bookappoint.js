@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const BookappointSchema = new mongoose.Schema({
-    Date: {
+    Nextappointment: {
         type: Date,
     },
     Time: {
@@ -9,6 +9,10 @@ const BookappointSchema = new mongoose.Schema({
 
     doctor_id: {
         ref: "doctor",
+        type: mongoose.Schema.Types.ObjectId
+    },
+    patient_id: {
+        ref: "patient",
         type: mongoose.Schema.Types.ObjectId
     }
 

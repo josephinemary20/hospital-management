@@ -66,7 +66,7 @@ export default function Patienthistory() {
             <ol>
                 {appointments.map(appointment => (
                     <li key={appointment._id}>
-                        {appointment.Date} - {appointment.Time} - {appointment.Reason} - {appointment.doctorName} - {appointment.patientName}
+                        {appointment.Lastappointment} -{appointment.Nextappointment} - {appointment.Time} - {appointment.Reason} - {appointment.doctorName} - {appointment.patientName}
                     </li>
                 ))}
             </ol>

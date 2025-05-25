@@ -6,14 +6,16 @@ import axiosInstance from "../axiosinstance/axiosinstance"
 export default function Patientdashbord() {
 
     // book appointment
-    const [Date, setDate] = useState('')
+    const [Nextappointment, setNextappointment] = useState('')
     const [Time, setTime] = useState('')
     const [doctor_id, setDoctor_id] = useState()
     const [doctorlist, setDoctorlist] = useState([])
+    const [patient_id, setPatient_id] = useState()
+    const [patientlist, setPatientlist] = useState([])
 
 
     const Bookappoint = () => {
-        axiosInstance.post('http://localhost:2000/book', { Date, Time, doctor_id }).then(res => {
+        axiosInstance.post('http://localhost:2000/book', { Nextappointment, Time, doctor_id, patient_id }).then(res => {
         })
 
     }
@@ -24,6 +26,13 @@ export default function Patientdashbord() {
                 setDoctorlist(res?.data)
             })
     }
+    const getpatient = () => {
+        axios.get('http://localhost:2000/patient_get')
+            .then(res => {
+                setPatientlist(res?.data)
+            })
+
+    }
 
     const Submit = e => {
         e.preventDefault()
@@ -32,6 +41,7 @@ export default function Patientdashbord() {
 
     useEffect(() => {
         getdoctor();
+        getpatient();
     }, [])
 
     let navigate = useNavigate();
@@ -45,7 +55,18 @@ export default function Patientdashbord() {
         </div>
         <form onSubmit={Submit}>
             <div className="mt-3">
-                <input onChange={e => setDate(e.target.value)} type="Date" value={Date || ''} />
+                <select onChange={e => setPatient_id(e.target.value)} value={patient_id} >
+                    <option>select patientname</option>
+
+                    {
+                        patientlist?.map((patient) => <option key={patient._id} value={patient._id}>{patient.Patientname}</option>)
+                    }
+
+                </select>
+            </div>
+            <div className="mt-3">
+                <label>Nextappointment</label><br />
+                <input onChange={e => setNextappointment(e.target.value)} type="Date" value={Nextappointment || ''} />
             </div>
             <div className="mt-3">
                 <input onChange={e => setTime(e.target.value)} value={Time || ''} placeholder="Time" />
@@ -74,7 +95,7 @@ export default function Patientdashbord() {
             <Link to={'/patientprescription'}>VIEW PRESCRIPTION</Link>
         </div>
         <div className="mt-3">
-            <Link>PAY BILLS</Link>
+            <Link to={'/payment'}>PAY BILLS</Link>
         </div>
         <div className="mt-3">
             <button className="btn btn-danger" onClick={logout}>LOGOUT</button>

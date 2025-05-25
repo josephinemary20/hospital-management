@@ -10,13 +10,14 @@ export default function Appointmentdashbord() {
     const [Starttime, setStarttime] = useState('')
     const [Endtime, setEndtime] = useState('')
     const [Slotduration, setSlotduration] = useState('')
+    const [Availabledate, setAvailabledate] = useState('')
     const [doctor_id, setDoctor_id] = useState()
     const [doctorlist, setDoctorlist] = useState([])
     const [department_id, setDepartment_id] = useState()
     const [departmentlist, setDepartmentlist] = useState([])
 
     const Bookpage = () => {
-        axiosInstance.post('http://localhost:2000/book', { Starttime, Endtime, Slotduration, doctor_id, department_id }).then(res => {
+        axiosInstance.post('http://localhost:2000/slot', { Starttime, Endtime, Slotduration, Availabledate, doctor_id, department_id }).then(res => {
         })
     }
     const getdoctor = () => {
@@ -27,9 +28,9 @@ export default function Appointmentdashbord() {
     }
 
     const getdepartment = () => {
-        axios.get('http://localhost:2000/doctor_get')
+        axios.get('http://localhost:2000/department_get')
             .then(res => {
-                setDoctorlist(res?.data)
+                setDepartmentlist(res?.data)
             })
     }
 
@@ -52,6 +53,10 @@ export default function Appointmentdashbord() {
             </div>
             <div className="mt-3">
                 <input onChange={e => setSlotduration(e.target.value)} value={Slotduration || ''} placeholder="Slotduration" />
+            </div>
+            <div className="mt-3">
+                <label>Availabledate</label><br />
+                <input onChange={e => setAvailabledate(e.target.value)} value={Availabledate || ''} type="Date" />
             </div>
             <div className="mt-3">
                 <select onChange={e => setDoctor_id(e.target.value)} value={doctor_id} >
@@ -82,7 +87,7 @@ export default function Appointmentdashbord() {
             <Link to={'/slot'}>BOOKING PAGE</Link>
         </div>
         <div className="mt-3">
-            <Link>CALENDAR AVAILABILITY</Link>
+            <Link to={'/availabledate'}>DOCTOR AVAILABLE DATE</Link>
         </div>
         <div className="mt-3 " >
             <button className=" btn bg-danger " onClick={() => navigate('/admindashbord')} >GO BACK</button>

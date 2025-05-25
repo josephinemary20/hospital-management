@@ -6,7 +6,8 @@ import axiosInstance from "../axiosinstance/axiosinstance"
 
 export default function Doctordashbord() {
     // appointment
-    const [Date, setDate] = useState('')
+    const [Nextappointment, setNextappointment] = useState('')
+    const [Lastappointment, setLastappointment] = useState('')
     const [Time, setTime] = useState('')
     const [Reason, setReason] = useState('')
     const [patient_id, setPatient_id] = useState()
@@ -17,16 +18,10 @@ export default function Doctordashbord() {
     const [Medicine, setMedicine] = useState('')
     const [Dosage, setDosage] = useState('')
 
-    // history
-    const [appointment_id, setAppointment_id] = useState()
-    const [appointmentlist, setAppointmentlist] = useState([])
-    const [prescription_id, setPrescription_id] = useState()
-    const [prescriptionlist, setPrescriptionlist] = useState([])
-
 
 
     const createAppoint = () => {
-        axiosInstance.post('http://localhost:2000/appoint', { Date, Time, Reason, patient_id, doctor_id }).then(res => {
+        axiosInstance.post('http://localhost:2000/appoint', { Lastappointment, Nextappointment, Time, Reason, patient_id, doctor_id }).then(res => {
 
         })
 
@@ -67,40 +62,6 @@ export default function Doctordashbord() {
         createPres();
     }
 
-    const createhistory = () => {
-        axiosInstance.post('http://localhost:2000/history', { appointment_id, prescription_id }).then(res => {
-
-        })
-    }
-    const getappointment = () => {
-        axios.get('http://localhost:2000/appoint_get')
-            .then(res => {
-                setAppointmentlist(res?.data)
-            })
-    }
-
-    const getprescription = () => {
-        axios.get('http://localhost:2000/pres_get')
-            .then(res => {
-                setPrescriptionlist(res?.data)
-            })
-    }
-
-
-    const Submithistory = e => {
-        e.preventDefault()
-        createhistory();
-    }
-
-    useEffect(() => {
-        getappointment();
-        getprescription();
-
-    }, [])
-
-
-
-
 
 
     let navigate = useNavigate();
@@ -113,7 +74,12 @@ export default function Doctordashbord() {
 
         <form onSubmit={Submit}>
             <div className="mt-3">
-                <input onChange={e => setDate(e.target.value)} type="Date" value={Date || ''} />
+                <label>Nextappointment</label><br />
+                <input onChange={e => setNextappointment(e.target.value)} type="Date" value={Nextappointment || ''} />
+            </div>
+            <div className="mt-3">
+                <label>Lastappointment</label><br />
+                <input onChange={e => setLastappointment(e.target.value)} type="Date" value={Lastappointment || ''} />
             </div>
             <div className="mt-3">
                 <input onChange={e => setTime(e.target.value)} value={Time || ''} placeholder="Time" />
@@ -178,72 +144,6 @@ export default function Doctordashbord() {
         <div className="mt-3">
             <Link to={'/prescription'}>ADD PRESCRIPTION TO PATIENT</Link>
         </div>
-        <form onSubmit={Submithistory}>
-            <div className="mt-3">
-                <select onChange={e => setPatient_id(e.target.value)} value={patient_id}  >
-                    <option>select patientname</option>
-
-                    {
-                        patientlist.map((patient) => <option key={patient._id} value={patient._id}>{patient.Patientname}</option>)
-                    }
-
-                </select>
-            </div>
-            < div className="mt-3">
-                <select onChange={e => setDoctor_id(e.target.value)} value={doctor_id} >
-                    <option>select doctorname</option>
-
-                    {
-                        doctorlist?.map((doctor) => <option key={doctor._id} value={doctor._id}>{doctor.Doctorname}</option>)
-                    }
-
-                </select>
-            </div>
-            < div className="mt-3">
-                <select onChange={e => setAppointment_id(e.target.value)} value={appointment_id}  >
-                    <option>select Date</option>
-
-                    {
-                        appointmentlist.map((appoint) => <option key={appoint._id} value={appoint._id}>{appoint.Date}</option>)
-                    }
-
-                </select>
-            </div>
-            < div className="mt-3">
-                <select onChange={e => setAppointment_id(e.target.value)} value={appointment_id}  >
-                    <option>select Reason</option>
-
-                    {
-                        appointmentlist.map((appoint) => <option key={appoint._id} value={appoint._id}>{appoint.Reason}</option>)
-                    }
-
-                </select>
-            </div>
-            < div className="mt-3">
-                <select onChange={e => setPrescription_id(e.target.value)} value={prescription_id}  >
-                    <option>select Medicine</option>
-
-                    {
-                        prescriptionlist.map((pres) => <option key={pres._id} value={pres._id}>{pres.Medicine}</option>)
-                    }
-
-                </select>
-            </div>
-            < div className="mt-3">
-                <select onChange={e => setPrescription_id(e.target.value)} value={prescription_id}  >
-                    <option>select Dosage</option>
-
-                    {
-                        prescriptionlist.map((pres) => <option key={pres._id} value={pres._id}>{pres.Dosage}</option>)
-                    }
-
-                </select>
-            </div>
-            <div>
-                <button className="mt-3">submit</button>
-            </div>
-
-        </form>
 
         <div className="mt-3">
             <Link to={'/patienthistory'}>VIEW PATIENT HISTORY</Link>

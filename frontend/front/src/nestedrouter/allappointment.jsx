@@ -2,10 +2,12 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export default function Appointment() {
+export default function Allappointment() {
+
     const [appointments, setAppointments] = useState([]);
     const [doctors, setDoctors] = useState({});
     const [patients, setPatients] = useState({});
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -46,16 +48,29 @@ export default function Appointment() {
 
     return (
         <div className="text-center">
-            <h2 className="mb-3">Appointments</h2>
+            <h2 className="mb-3">Doctor Upcoming Appointments</h2>
             <ol>
                 {appointments.map(appointment => (
                     <li key={appointment._id}>
-                        {appointment.Nextappointment}-{appointment.Lastappointment}- {appointment.Time}-{appointment.Reason}- {appointment.doctorName}-{appointment.patientName}<br />
+                        {appointment.Nextappointment}- {appointment.Time}-{appointment.Reason}- {appointment.doctorName}-{appointment.patientName}<br />
 
                     </li>
                 ))}
             </ol>
-            <Link to={'/doctordashbord'}>GO BACK</Link>
+
+            <h2 className="mb-3"> Patient Booking Appointments History</h2>
+            <ol>
+                {appointments.map(appointment => (
+                    <li key={appointment._id}>
+                        {appointment.patientName}-{appointment.Nextappointment}- {appointment.Time}- {appointment.doctorName}<br />
+
+                    </li>
+                ))}
+            </ol>
+            <Link to={'/admindashbord'}>GO BACK</Link>
         </div>
     );
 }
+
+
+

@@ -2,16 +2,15 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Slot() {
+export default function Availabledate() {
     const [slots, setSlots] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [slotsRes, doctorsRes, departmentsRes] = await Promise.all([
+                const [slotsRes, doctorsRes] = await Promise.all([
                     axios.get("http://localhost:2000/slot_get"),
                     axios.get("http://localhost:2000/doctor_get"),
-                    axios.get("http://localhost:2000/department_get"),
                 ]);
 
                 const doctorMap = {};
@@ -19,19 +18,12 @@ export default function Slot() {
                     doctorMap[doctor._id] = doctor.Doctorname;
                 });
 
-                const departmentMap = {};
-                departmentsRes.data.forEach((dept) => {
-                    departmentMap[dept._id] = dept.Department;
-                });
-
-                const formattedSlots = slotsRes.data.map((slot) => ({
+                const fetchedAvailabledate = slotsRes.data.map((slot) => ({
                     ...slot,
                     doctorName: doctorMap[slot.doctor_id] || "Unknown Doctor",
-                    departmentName: departmentMap[slot.department_id] || "Unknown Department",
-
                 }));
 
-                setSlots(formattedSlots);
+                setSlots(fetchedAvailabledate); // Moved inside try block
             } catch (error) {
                 console.error("Error fetching slot data:", error);
             }
@@ -42,18 +34,15 @@ export default function Slot() {
 
     return (
         <div className="text-center">
-            <h2 className="mb-3">Book Appointments</h2>
-
+            <h1>Doctor Available Dates</h1>
             <ol>
-                {slots.map(slot => (
+                {slots.map((slot) => (
                     <li key={slot._id}>
-
-                        {slot.Starttime} - {slot.Endtime} - {slot.doctorName} - {slot.departmentName} - {slot.Slotduration}-{slot.Availabledate}
+                        {slot.doctorName} - {slot.Availabledate}
                     </li>
                 ))}
             </ol>
-
-            <Link to={'/appointmentdashbord'}>GO BACK</Link>
+            <Link to="/appointmentdashbord">GO BACK</Link>
         </div>
     );
 }

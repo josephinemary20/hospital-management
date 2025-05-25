@@ -1,7 +1,11 @@
 
 const mongoose = require('mongoose')
 const AppointmentSchema = new mongoose.Schema({
-    Date: {
+
+    Lastappointment: {
+        type: Date,
+    },
+    Nextappointment: {
         type: Date,
     },
     Time: {
