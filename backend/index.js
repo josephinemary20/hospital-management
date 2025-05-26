@@ -9,6 +9,7 @@ const pres = require('./control/prescription')
 const book = require('./control/bookappoint')
 const department = require('./control/department')
 const slot = require('./control/slot')
+const bill = require('./control/bill')
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(pres)
 app.use(book)
 app.use(department)
 app.use(slot)
+app.use(bill)
 
 
 

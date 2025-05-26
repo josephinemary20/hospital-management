@@ -35,6 +35,7 @@ export default function Prescription() {
     return (
         <div className="text-center">
             <h2 className="mb-4">Prescriptions</h2>
+            <h5>PatientName  Medicine  Dosage  </h5>
             <ol>
                 {prescriptions.map(prescription => (
                     <li key={prescription._id}>

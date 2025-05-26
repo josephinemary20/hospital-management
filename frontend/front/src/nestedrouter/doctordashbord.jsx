@@ -20,6 +20,7 @@ export default function Doctordashbord() {
 
 
 
+
     const createAppoint = () => {
         axiosInstance.post('http://localhost:2000/appoint', { Lastappointment, Nextappointment, Time, Reason, patient_id, doctor_id }).then(res => {
 
@@ -61,6 +62,8 @@ export default function Doctordashbord() {
         e.preventDefault()
         createPres();
     }
+
+
 
 
 

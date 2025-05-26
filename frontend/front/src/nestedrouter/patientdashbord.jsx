@@ -4,18 +4,29 @@ import axios from 'axios'
 import axiosInstance from "../axiosinstance/axiosinstance"
 
 export default function Patientdashbord() {
+    const Click = () => {
+        alert(" Your appointment successfully Register.");
+    };
+    const Bill = () => {
+        alert(" Your payment is successfully .");
+    };
 
     // book appointment
     const [Nextappointment, setNextappointment] = useState('')
     const [Time, setTime] = useState('')
+    const [Patientname, setPatientname] = useState('')
     const [doctor_id, setDoctor_id] = useState()
     const [doctorlist, setDoctorlist] = useState([])
-    const [patient_id, setPatient_id] = useState()
-    const [patientlist, setPatientlist] = useState([])
+
+
+    // bill
+
+    const [Amount, setAmount] = useState('')
+    const [Paymentstatus, setPaymentstatus] = useState('')
 
 
     const Bookappoint = () => {
-        axiosInstance.post('http://localhost:2000/book', { Nextappointment, Time, doctor_id, patient_id }).then(res => {
+        axiosInstance.post('http://localhost:2000/book', { Nextappointment, Time, doctor_id, Patientname }).then(res => {
         })
 
     }
@@ -26,13 +37,6 @@ export default function Patientdashbord() {
                 setDoctorlist(res?.data)
             })
     }
-    const getpatient = () => {
-        axios.get('http://localhost:2000/patient_get')
-            .then(res => {
-                setPatientlist(res?.data)
-            })
-
-    }
 
     const Submit = e => {
         e.preventDefault()
@@ -41,8 +45,18 @@ export default function Patientdashbord() {
 
     useEffect(() => {
         getdoctor();
-        getpatient();
     }, [])
+
+    const createbill = () => {
+        axiosInstance.post('http://localhost:2000/bill', { Amount, Paymentstatus, Patientname }).then(res => {
+
+        })
+    }
+
+    const Submitbill = e => {
+        e.preventDefault()
+        createbill();
+    }
 
     let navigate = useNavigate();
     const logout = async () => {
@@ -55,15 +69,9 @@ export default function Patientdashbord() {
         </div>
         <form onSubmit={Submit}>
             <div className="mt-3">
-                <select onChange={e => setPatient_id(e.target.value)} value={patient_id} >
-                    <option>select patientname</option>
-
-                    {
-                        patientlist?.map((patient) => <option key={patient._id} value={patient._id}>{patient.Patientname}</option>)
-                    }
-
-                </select>
+                <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" />
             </div>
+
             <div className="mt-3">
                 <label>Nextappointment</label><br />
                 <input onChange={e => setNextappointment(e.target.value)} type="Date" value={Nextappointment || ''} />
@@ -84,7 +92,7 @@ export default function Patientdashbord() {
                 </select>
             </div>
             <div className="mt-3">
-                <button>submit</button>
+                <button onClick={Click}>submit</button>
             </div>
         </form>
 
@@ -94,6 +102,22 @@ export default function Patientdashbord() {
         <div className="mt-3">
             <Link to={'/patientprescription'}>VIEW PRESCRIPTION</Link>
         </div>
+        <form onClick={Submitbill}>
+            <div className="mt-3">
+                <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" />
+            </div>
+            <div className="mt-3">
+                <input onChange={e => setAmount(e.target.value)} value={Amount || ''} placeholder="Amount" />
+            </div>
+            <div className="mt-3">
+                <input onChange={e => setPaymentstatus(e.target.value)} value={Paymentstatus || ''} placeholder="Paymentstatus" />
+            </div>
+            <div className="mt-3">
+                <button onClick={Bill}>submit</button>
+            </div>
+
+
+        </form>
         <div className="mt-3">
             <Link to={'/payment'}>PAY BILLS</Link>
         </div>

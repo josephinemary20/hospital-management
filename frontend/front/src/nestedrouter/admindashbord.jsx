@@ -83,7 +83,7 @@ export default function Admindashbord() {
             <Link to={'/managepatient'}>MANAGE PATIENTS</Link>
         </div>
         <div className="mt-3">
-            <Link>BILLING REPORTS</Link>
+            <Link to={'/bill'}>BILLING REPORTS</Link>
         </div>
         <div className="mt-3">
             <button className="btn btn-primary" onClick={() => navigate('/appointmentdashbord')}>APPOINTMENT MANAGEMENT</button>

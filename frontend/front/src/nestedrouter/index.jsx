@@ -20,6 +20,7 @@ import Availabledate from "./availabledate"
 import Allappointment from "./allappointment"
 import Managepatient from "./managepatient"
 import Payment from "./payment"
+import Bill from "./bill"
 
 
 
@@ -89,11 +90,8 @@ export default function Nestedrouter() {
                 <Route path='allappointment' element={<Allappointment />} />
                 <Route path='/slot' element={<Slot />} />
                 <Route path='/managepatient' element={<Managepatient />} />
-
+                <Route path='/bill' element={<Bill />} />
             </Route>
-
-
-
         </Routes>
     </div>
 

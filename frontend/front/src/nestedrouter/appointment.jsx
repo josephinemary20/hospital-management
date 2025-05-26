@@ -47,10 +47,11 @@ export default function Appointment() {
     return (
         <div className="text-center">
             <h2 className="mb-3">Appointments</h2>
+            <h5>NextAppointment  LastAppointment  Time  Reason DoctorName  PatientName</h5>
             <ol>
                 {appointments.map(appointment => (
                     <li key={appointment._id}>
-                        {appointment.Nextappointment}-{appointment.Lastappointment}- {appointment.Time}-{appointment.Reason}- {appointment.doctorName}-{appointment.patientName}<br />
+                        {appointment.Nextappointment}{appointment.Lastappointment}- {appointment.Time}-{appointment.Reason}- {appointment.doctorName}-{appointment.patientName}<br />
 
                     </li>
                 ))}
