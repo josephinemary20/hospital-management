@@ -8,16 +8,12 @@ export default function Bill() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [billsData, patientsData] = await Promise.all([
+                const [billsData] = await Promise.all([
                     axios.get('http://localhost:2000/bill_get')
-
                 ]);
-
-
 
                 const fetchedBills = billsData.data.map(bill => ({
                     ...bill,
-
                 }));
 
                 setBills(fetchedBills);
@@ -32,14 +28,24 @@ export default function Bill() {
     return (
         <div className="text-center">
             <h2 className="mb-3">Billing Reports</h2>
-            <ol>
-                {bills.map(bill => (
-                    <li key={bill._id}>
-                        {bill.Patientname} - {bill.Amount} - {bill.Paymentstatus}
-                        <br />
-                    </li>
-                ))}
-            </ol>
+            <table className="table table-bordered mx-auto" style={{ width: "80%" }}>
+                <thead className="thead-dark">
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Amount</th>
+                        <th>Payment Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {bills.map(bill => (
+                        <tr key={bill._id}>
+                            <td>{bill.Patientname}</td>
+                            <td>{bill.Amount}</td>
+                            <td>{bill.Paymentstatus}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
             <Link to="/admindashbord">GO BACK</Link>
         </div>
     );

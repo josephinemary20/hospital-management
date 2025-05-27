@@ -37,7 +37,6 @@ export default function Allappointment() {
                 const fetchedBookAppointments = bookappointmentsdata.data.map(book => ({
                     ...book,
                     doctorName: doctorMap[book.doctor_id] || 'Unknown Doctor',
-
                 }));
 
                 setAppointments(fetchedAppointments);
@@ -53,26 +52,54 @@ export default function Allappointment() {
     return (
         <div className="text-center">
             <h2 className="mb-3">Doctor Upcoming Appointments</h2>
-            <h5>NextAppointment  LastAppointment  Time  Reason  DoctorName PatientName</h5>
-            <ol>
-                {appointments.map(appointment => (
-                    <li key={appointment._id}>
-                        {appointment.Nextappointment}  {appointment.Lastappointment}  {appointment.Time}  {appointment.Reason}  {appointment.doctorName}  {appointment.patientName}
-                    </li>
-                ))}
-            </ol>
+            <table className="table table-bordered mx-auto" style={{ width: "90%" }}>
+                <thead className="thead-dark">
+                    <tr>
+                        <th>Next Appointment</th>
+                        <th>Last Appointment</th>
+                        <th>Time</th>
+                        <th>Reason</th>
+                        <th>Doctor Name</th>
+                        <th>Patient Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {appointments.map(appointment => (
+                        <tr key={appointment._id}>
+                            <td>{appointment.Nextappointment}</td>
+                            <td>{appointment.Lastappointment}</td>
+                            <td>{appointment.Time}</td>
+                            <td>{appointment.Reason}</td>
+                            <td>{appointment.doctorName}</td>
+                            <td>{appointment.patientName}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
             <h2 className="mb-3 mt-5">Patient Booking Appointments History</h2>
-            <h5>PatientName  NextAppointment Time  DoctorName</h5>
-            <ol>
-                {bookappointments.map(book => (
-                    <li key={book._id}>
-                        {book.Patientname}  {book.Nextappointment}  {book.Time}  {book.doctorName}
-                    </li>
-                ))}
-            </ol>
+            <table className="table table-bordered mx-auto" style={{ width: "80%" }}>
+                <thead className="thead-dark">
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Next Appointment</th>
+                        <th>Time</th>
+                        <th>Doctor Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {bookappointments.map(book => (
+                        <tr key={book._id}>
+                            <td>{book.Patientname}</td>
+                            <td>{book.Nextappointment}</td>
+                            <td>{book.Time}</td>
+                            <td>{book.doctorName}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
-            <Link to={'/admindashbord'}>GO BACK</Link>
+            <Link to="/admindashbord">GO BACK</Link>
         </div>
     );
 }

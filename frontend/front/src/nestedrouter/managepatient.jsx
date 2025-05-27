@@ -10,13 +10,11 @@ export default function Managepatient() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-
                 const [appointmentsdata, doctorsdata, patientsdata] = await Promise.all([
                     axios.get('http://localhost:2000/appoint_get'),
                     axios.get('http://localhost:2000/doctor_get'),
                     axios.get('http://localhost:2000/patient_get'),
                 ]);
-
 
                 const doctorMap = {};
                 doctorsdata.data.forEach(doctor => {
@@ -27,7 +25,6 @@ export default function Managepatient() {
                 patientsdata.data.forEach(patient => {
                     patientMap[patient._id] = patient.Patientname;
                 });
-
 
                 const fetchedAppointments = appointmentsdata.data.map(appointment => ({
                     ...appointment,
@@ -47,14 +44,28 @@ export default function Managepatient() {
     return (
         <div className="text-center">
             <h2 className="mb-3">Manage Patient History</h2>
-            <ol>
-                {appointments.map(appointment => (
-                    <li key={appointment._id}>
-                        {appointment.patientName}-{appointment.Lastappointment}-{appointment.Reason}-{appointment.Nextappointment}-{appointment.doctorName}<br />
-
-                    </li>
-                ))}
-            </ol>
+            <table className="table table-bordered mx-auto" style={{ width: "90%" }}>
+                <thead className="thead-dark">
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Last Appointment</th>
+                        <th>Reason</th>
+                        <th>Next Appointment</th>
+                        <th>Doctor Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {appointments.map(appointment => (
+                        <tr key={appointment._id}>
+                            <td>{appointment.patientName}</td>
+                            <td>{appointment.Lastappointment}</td>
+                            <td>{appointment.Reason}</td>
+                            <td>{appointment.Nextappointment}</td>
+                            <td>{appointment.doctorName}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
             <Link to={'/admindashbord'}>GO BACK</Link>
         </div>
     );

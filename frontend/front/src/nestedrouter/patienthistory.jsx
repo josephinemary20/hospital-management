@@ -23,7 +23,6 @@ export default function Patienthistory() {
                     axios.get("http://localhost:2000/doctor_get")
                 ]);
 
-                // Build patient and doctor maps
                 const patientMap = {};
                 patientsRes.data.forEach(patient => {
                     patientMap[patient._id] = patient.Patientname;
@@ -34,20 +33,17 @@ export default function Patienthistory() {
                     doctorMap[doctor._id] = doctor.Doctorname;
                 });
 
-                // Map appointment data
                 const mappedAppointments = appointmentsRes.data.map(app => ({
                     ...app,
                     doctorName: doctorMap[app.doctor_id] || "Unknown Doctor",
                     patientName: patientMap[app.patient_id] || "Unknown Patient"
                 }));
 
-                // Map prescription data
                 const mappedPrescriptions = prescriptionsRes.data.map(pres => ({
                     ...pres,
                     patientName: patientMap[pres.patient_id] || "Unknown Patient"
                 }));
 
-                // Set states
                 setDoctorsMap(doctorMap);
                 setPatientsMap(patientMap);
                 setAppointments(mappedAppointments);
@@ -63,22 +59,50 @@ export default function Patienthistory() {
     return (
         <div className="text-center">
             <h2 className="mb-3">Appointments</h2>
-            <ol>
-                {appointments.map(appointment => (
-                    <li key={appointment._id}>
-                        {appointment.Lastappointment} -{appointment.Nextappointment} - {appointment.Time} - {appointment.Reason} - {appointment.doctorName} - {appointment.patientName}
-                    </li>
-                ))}
-            </ol>
+            <table className="table table-bordered mx-auto" style={{ width: '90%', marginTop: '20px' }}>
+                <thead>
+                    <tr>
+                        <th>Last Appointment</th>
+                        <th>Next Appointment</th>
+                        <th>Time</th>
+                        <th>Reason</th>
+                        <th>Doctor Name</th>
+                        <th>Patient Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {appointments.map(appointment => (
+                        <tr key={appointment._id}>
+                            <td>{appointment.Lastappointment}</td>
+                            <td>{appointment.Nextappointment}</td>
+                            <td>{appointment.Time}</td>
+                            <td>{appointment.Reason}</td>
+                            <td>{appointment.doctorName}</td>
+                            <td>{appointment.patientName}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
-            <h2 className="mb-4">Prescriptions</h2>
-            <ol>
-                {prescriptions.map(prescription => (
-                    <li key={prescription._id}>
-                        {prescription.patientName} - {prescription.Medicine} - {prescription.Dosage}
-                    </li>
-                ))}
-            </ol>
+            <h2 className="mb-4 mt-5">Prescriptions</h2>
+            <table className="table table-bordered mx-auto" style={{ width: '60%' }}>
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Medicine</th>
+                        <th>Dosage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {prescriptions.map(prescription => (
+                        <tr key={prescription._id}>
+                            <td>{prescription.patientName}</td>
+                            <td>{prescription.Medicine}</td>
+                            <td>{prescription.Dosage}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
 
             <Link to="/doctordashbord">GO BACK</Link>
         </div>

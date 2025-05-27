@@ -28,7 +28,6 @@ export default function Slot() {
                     ...slot,
                     doctorName: doctorMap[slot.doctor_id] || "Unknown Doctor",
                     departmentName: departmentMap[slot.department_id] || "Unknown Department",
-
                 }));
 
                 setSlots(formattedSlots);
@@ -43,16 +42,30 @@ export default function Slot() {
     return (
         <div className="text-center">
             <h2 className="mb-3">Book Appointments</h2>
-
-            <ol>
-                {slots.map(slot => (
-                    <li key={slot._id}>
-
-                        {slot.Starttime} - {slot.Endtime} - {slot.doctorName} - {slot.departmentName} - {slot.Slotduration}-{slot.Availabledate}
-                    </li>
-                ))}
-            </ol>
-
+            <table className="table table-bordered mx-auto" style={{ width: "90%" }}>
+                <thead className="thead-dark">
+                    <tr>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Doctor Name</th>
+                        <th>Department</th>
+                        <th>Slot Duration</th>
+                        <th>Available Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {slots.map(slot => (
+                        <tr key={slot._id}>
+                            <td>{slot.Starttime}</td>
+                            <td>{slot.Endtime}</td>
+                            <td>{slot.doctorName}</td>
+                            <td>{slot.departmentName}</td>
+                            <td>{slot.Slotduration}</td>
+                            <td>{slot.Availabledate}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
             <Link to={'/appointmentdashbord'}>GO BACK</Link>
         </div>
     );

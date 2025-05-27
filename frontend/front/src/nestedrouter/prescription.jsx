@@ -25,7 +25,7 @@ export default function Prescription() {
 
                 setPrescriptions(fetchedPrescription);
             } catch (error) {
-                console.error(" fetching prescription data:", error);
+                console.error("Error fetching prescription data:", error);
             }
         };
 
@@ -35,14 +35,24 @@ export default function Prescription() {
     return (
         <div className="text-center">
             <h2 className="mb-4">Prescriptions</h2>
-            <h5>PatientName  Medicine  Dosage  </h5>
-            <ol>
-                {prescriptions.map(prescription => (
-                    <li key={prescription._id}>
-                        {prescription.patientName}-{prescription.Medicine} -{prescription.Dosage} <br />
-                    </li>
-                ))}
-            </ol>
+            <table className="table table-bordered mx-auto" style={{ width: '80%', marginTop: '20px' }}>
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Medicine</th>
+                        <th>Dosage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {prescriptions.map(prescription => (
+                        <tr key={prescription._id}>
+                            <td>{prescription.patientName}</td>
+                            <td>{prescription.Medicine}</td>
+                            <td>{prescription.Dosage}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
             <Link to={'/doctordashbord'}>GO BACK</Link>
         </div>
     );
