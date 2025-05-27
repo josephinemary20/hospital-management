@@ -21,6 +21,12 @@ import Allappointment from "./allappointment"
 import Managepatient from "./managepatient"
 import Payment from "./payment"
 import Bill from "./bill"
+import Assigndepartment from "./assigndepartment"
+import Assigndoctorappoint from "./assigndoctorappoint"
+import Upcomingappoint from "./upcomingappoint"
+import Addprescription from "./addprescription"
+import Patientappoint from "./patientappoint"
+import Paybill from "./paybill"
 
 
 
@@ -76,12 +82,16 @@ export default function Nestedrouter() {
                 <Route path='/appointment' element={<Appointment />} />
                 <Route path='/prescription' element={<Prescription />} />
                 <Route path='/patienthistory' element={<Patienthistory />} />
+                <Route path='upcomingappoint' element={<Upcomingappoint />} />
+                <Route path='addprescription' element={<Addprescription />} />
             </Route>
             <Route element={<Protectpatient />} >
                 <Route path='/patientdashbord' element={<Patientdashbord />} />
                 <Route path='/bookappoint' element={< Bookappoint />} />
                 <Route path='patientprescription' element={<Patientprescription />} />
                 <Route path='/payment' element={<Payment />} />
+                <Route path='patientappoint' element={<Patientappoint />} />
+                <Route path='paybill' element={<Paybill />} />
             </Route>
             <Route element={<Protectadmin />} >
                 <Route path='/admindashbord' element={<Admindashbord />} />
@@ -91,6 +101,8 @@ export default function Nestedrouter() {
                 <Route path='/slot' element={<Slot />} />
                 <Route path='/managepatient' element={<Managepatient />} />
                 <Route path='/bill' element={<Bill />} />
+                <Route path='/assigndepartment' element={<Assigndepartment />} />
+                <Route path='/assigndoctorappoint' element={<Assigndoctorappoint />} />
             </Route>
         </Routes>
     </div>
