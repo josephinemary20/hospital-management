@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import '../../src/nestedrouter/style.css'
 
 export default function Patientdashbord() {
 
@@ -7,26 +8,30 @@ export default function Patientdashbord() {
         localStorage.clear()
         navigate('/')
     }
-    return <div className="text-center">
-        <div className="mt-3">
-            <button className="btn btn-secondary" onClick={() => navigate('/patientappoint')}>Booking form</button>
-        </div>
+    return <div className="text-center" class="patientdashbord">
+        <div className="text-center">
 
-        <div className="mt-3">
-            <Link to={'/bookappoint'}>VIEW PATIENT APPOINTMENT HISTORY</Link>
-        </div>
-        <div className="mt-3">
-            <button className="btn btn-secondary" onClick={() => navigate('/paybill')}>prescription form</button>
-        </div>
-        <div className="mt-3">
-            <Link to={'/patientprescription'}>VIEW PRESCRIPTION</Link>
-        </div>
+            <div >
+                <button className="btn btn-secondary" onClick={() => navigate('/patientappoint')}>Booking form</button>
+            </div>
 
-        <div className="mt-3">
-            <Link to={'/payment'}>PAY BILLS</Link>
-        </div>
-        <div className="mt-3">
-            <button className="btn btn-danger" onClick={logout}>LOGOUT</button>
-        </div>
+            <div className="mt-3">
+                <Link to={'/bookappoint'}>VIEW PATIENT APPOINTMENT HISTORY</Link>
+            </div>
+            <div className="mt-3">
+                <button className="btn btn-secondary" onClick={() => navigate('/paybill')}>prescription form</button>
+            </div>
+            <div className="mt-3">
+                <Link to={'/patientprescription'}>VIEW PRESCRIPTION</Link>
+            </div>
+
+            <div className="mt-3">
+                <Link to={'/payment'}>PAY BILLS</Link>
+            </div>
+            <div className="mt-3">
+                <button className="btn btn-danger" onClick={logout}>LOGOUT</button>
+            </div>
+        </div >
+
     </div>
 }

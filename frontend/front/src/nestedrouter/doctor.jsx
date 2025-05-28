@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosinstance/axiosinstance";
+import '../../src/nestedrouter/style.css'
 
 export default function Doctor() {
     const [Doctorname, setDoctorname] = useState('')
@@ -29,24 +30,26 @@ export default function Doctor() {
 
 
 
-    return <div className="text-center">
+    return <div className="text-center" class="doctor">
         <form >
-            <div className="mt-3 ">
-                <h3>DOCTOR SIGNUP</h3>
-            </div>
-            <div className="mt-3">
-                <input onChange={e => setDoctorname(e.target.value)} value={Doctorname || ''} placeholder="Doctorname" />
-            </div>
-            <div className="mt-3">
-                <input onChange={e => setDoctorid(e.target.value)} value={Doctorid || ''} placeholder="Doctorid" />
+            <div className="text-center">
+                <div >
+                    <h3>DOCTOR SIGNUP</h3>
+                </div>
+                <div className="mt-3">
+                    <input onChange={e => setDoctorname(e.target.value)} value={Doctorname || ''} placeholder="Doctorname" />
+                </div>
+                <div className="mt-3">
+                    <input onChange={e => setDoctorid(e.target.value)} value={Doctorid || ''} placeholder="Doctorid" />
 
-            </div>
+                </div>
 
-            <div className="mt-3">
-                <button onClick={doctorsignup}>SIGNUP</button>
-            </div>
-            <div className="mt-3">
-                <button onClick={doctorLogin} >LOGIN</button>
+                <div className="mt-3">
+                    <button onClick={doctorsignup}>SIGNUP</button>
+                </div>
+                <div className="mt-3">
+                    <button onClick={doctorLogin} >LOGIN</button>
+                </div>
             </div>
         </form>
 

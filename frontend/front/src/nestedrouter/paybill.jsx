@@ -1,6 +1,7 @@
 import { Link, } from "react-router-dom";
 import { useState, } from "react";
 import axiosInstance from "../axiosinstance/axiosinstance"
+import '../../src/nestedrouter/style.css'
 
 export default function Paybill() {
 
@@ -25,28 +26,30 @@ export default function Paybill() {
     }
 
 
-    return <div className="text-center">
-        <div className="mt-3">
-            <h3>PRESCRIPTION FORM</h3>
-        </div>
-        <form onClick={Submitbill}>
-            <div className="mt-3">
-                <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" />
+    return <div className="text-center" class="prescription">
+        <div className="text-center">
+            <div >
+                <h3>PRESCRIPTION FORM</h3>
             </div>
-            <div className="mt-3">
-                <input onChange={e => setAmount(e.target.value)} value={Amount || ''} placeholder="Amount" />
-            </div>
-            <div className="mt-3">
-                <input onChange={e => setPaymentstatus(e.target.value)} value={Paymentstatus || ''} placeholder="Paymentstatus" />
-            </div>
-            <div className="mt-3">
-                <button onClick={Bill}>submit</button>
-            </div>
+            <form onClick={Submitbill}>
+                <div className="mt-3">
+                    <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" />
+                </div>
+                <div className="mt-3">
+                    <input onChange={e => setAmount(e.target.value)} value={Amount || ''} placeholder="Amount" />
+                </div>
+                <div className="mt-3">
+                    <input onChange={e => setPaymentstatus(e.target.value)} value={Paymentstatus || ''} placeholder="Paymentstatus" />
+                </div>
+                <div className="mt-3">
+                    <button onClick={Bill}>submit</button>
+                </div>
 
-        </form>
+            </form>
 
-        <div className="mt-3">
-            <Link to={'/patientdashbord'}>GO BACK</Link>
+            <div className="mt-3">
+                <Link to={'/patientdashbord'}>GO BACK</Link>
+            </div>
         </div>
 
     </div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosinstance/axiosinstance";
+import '../../src/nestedrouter/style.css'
 
 export default function Admin() {
     const [Adminname, setAdminname] = useState('')
@@ -24,23 +25,25 @@ export default function Admin() {
     }
 
 
-    return <div className="text-center">
+    return <div className="text-center" class="admin">
         <form >
-            <div>
-                <h3>ADMIN SIGNUP</h3>
-            </div>
-            <div className="mt-3">
-                <input onChange={e => setAdminname(e.target.value)} value={Adminname || ''} placeholder="Adminname" />
-            </div>
-            <div className="mt-3">
-                <input onChange={e => setAdminid(e.target.value)} value={Adminid || ''} placeholder="Adminid" />
+            <div className="text-center">
+                <div>
+                    <h3>ADMIN SIGNUP</h3>
+                </div>
+                <div className="mt-3">
+                    <input onChange={e => setAdminname(e.target.value)} value={Adminname || ''} placeholder="Adminname" />
+                </div>
+                <div className="mt-3">
+                    <input onChange={e => setAdminid(e.target.value)} value={Adminid || ''} placeholder="Adminid" />
 
-            </div>
-            <div className="mt-3">
-                <button onClick={adminsignup}>SIGNUP</button>
-            </div>
-            <div className="mt-3">
-                <button onClick={adminLogin}>LOGIN</button>
+                </div>
+                <div className="mt-3">
+                    <button onClick={adminsignup}>SIGNUP</button>
+                </div>
+                <div className="mt-3">
+                    <button onClick={adminLogin}>LOGIN</button>
+                </div>
             </div>
         </form>
 

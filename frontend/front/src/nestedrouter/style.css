@@ -1,0 +1,97 @@
+.image {
+    background-image: url('../../public/hospital.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.doctor {
+    background-image: url('../../public/doctor.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.patient {
+    background-image: url('../../public/patient.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.admin {
+    background-image: url('../../public/admin.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.doctorappointment {
+    background-image: url('../../public/doctorappointment.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.addprescription {
+    background-image: url('../../public/addprescription.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.bookappointment {
+    background-image: url('../../public/bookappointment.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.prescription {
+    background-image: url('../../public/prescription.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.assigndepartment {
+    background-image: url('../../public/assigndepartment.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.adminbooking {
+    background-image: url('../../public/adminbooking.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.doctordashbord {
+    background-image: url('../../public/dotordashbord.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.patientdashbord {
+    background-image: url('../../public/patientdashbord.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.admindashbord {
+    background-image: url('../../public/admindashbord.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.appointmentdashbord {
+    background-image: url('../../public/appointmentdashbord.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}

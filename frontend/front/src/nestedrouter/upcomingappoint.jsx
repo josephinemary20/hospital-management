@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 import axios from 'axios'
 import axiosInstance from "../axiosinstance/axiosinstance"
+import '../../src/nestedrouter/style.css'
 
 
 export default function Upcomingappoint() {
@@ -47,53 +48,55 @@ export default function Upcomingappoint() {
         e.preventDefault()
         createAppoint();
     }
-    return <div className="text-center">
-        <div className="mt-3">
-            <h3>Appointment Form</h3>
-        </div>
-        <form onSubmit={Submit}>
-            <div className="mt-3">
-                <label>Nextappointment</label><br />
-                <input onChange={e => setNextappointment(e.target.value)} type="Date" value={Nextappointment || ''} />
+    return <div className="text-center" class="doctorappointment">
+        <div className="text-center">
+            <div >
+                <h3 className="text-primary">Appointment Form</h3>
             </div>
-            <div className="mt-3">
-                <label>Lastappointment</label><br />
-                <input onChange={e => setLastappointment(e.target.value)} type="Date" value={Lastappointment || ''} />
-            </div>
-            <div className="mt-3">
-                <input onChange={e => setTime(e.target.value)} value={Time || ''} placeholder="Time" />
-            </div>
-            <div className="mt-3">
-                <input onChange={e => setReason(e.target.value)} value={Reason || ''} placeholder="Reason" />
-            </div>
+            <form onSubmit={Submit}>
+                <div className="mt-3">
+                    <label className="text-info">Nextappointment</label><br />
+                    <input onChange={e => setNextappointment(e.target.value)} type="Date" value={Nextappointment || ''} />
+                </div>
+                <div className="mt-3">
+                    <label className="text-info">Lastappointment</label><br />
+                    <input onChange={e => setLastappointment(e.target.value)} type="Date" value={Lastappointment || ''} />
+                </div>
+                <div className="mt-3">
+                    <input onChange={e => setTime(e.target.value)} value={Time || ''} placeholder="Time" />
+                </div>
+                <div className="mt-3">
+                    <input onChange={e => setReason(e.target.value)} value={Reason || ''} placeholder="Reason" />
+                </div>
 
+                <div className="mt-3">
+                    <select onChange={e => setPatient_id(e.target.value)} value={patient_id}  >
+                        <option>select patientname</option>
+
+                        {
+                            patientlist.map((patient) => <option key={patient._id} value={patient._id}>{patient.Patientname}</option>)
+                        }
+
+                    </select>
+                </div>
+
+                <div className="mt-3">
+                    <select onChange={e => setDoctor_id(e.target.value)} value={doctor_id} >
+                        <option>select doctorname</option>
+
+                        {
+                            doctorlist?.map((doctor) => <option key={doctor._id} value={doctor._id}>{doctor.Doctorname}</option>)
+                        }
+
+                    </select>
+                </div>
+                <div className="mt-3">
+                    <button onSubmit={Submit}>submit</button>
+                </div>
+            </form>
             <div className="mt-3">
-                <select onChange={e => setPatient_id(e.target.value)} value={patient_id}  >
-                    <option>select patientname</option>
-
-                    {
-                        patientlist.map((patient) => <option key={patient._id} value={patient._id}>{patient.Patientname}</option>)
-                    }
-
-                </select>
+                <Link to={'/doctordashbord'}>GO BACK</Link>
             </div>
-
-            <div className="mt-3">
-                <select onChange={e => setDoctor_id(e.target.value)} value={doctor_id} >
-                    <option>select doctorname</option>
-
-                    {
-                        doctorlist?.map((doctor) => <option key={doctor._id} value={doctor._id}>{doctor.Doctorname}</option>)
-                    }
-
-                </select>
-            </div>
-            <div className="mt-3">
-                <button onSubmit={Submit}>submit</button>
-            </div>
-        </form>
-        <div className="mt-3">
-            <Link to={'/doctordashbord'}>GO BACK</Link>
         </div>
 
     </div>
