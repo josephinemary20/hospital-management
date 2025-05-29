@@ -53,7 +53,7 @@ export default function Allappointment() {
         <div className="text-center">
             <h2 className="mb-3">Doctor Upcoming Appointments</h2>
             <table className="table table-bordered mx-auto" style={{ width: "90%" }}>
-                <thead className="thead-dark">
+                <thead className="table-success">
                     <tr>
                         <th>Next Appointment</th>
                         <th>Last Appointment</th>
@@ -63,7 +63,7 @@ export default function Allappointment() {
                         <th>Patient Name</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-active">
                     {appointments.map(appointment => (
                         <tr key={appointment._id}>
                             <td>{appointment.Nextappointment}</td>
@@ -79,7 +79,7 @@ export default function Allappointment() {
 
             <h2 className="mb-3 mt-5">Patient Booking Appointments History</h2>
             <table className="table table-bordered mx-auto" style={{ width: "80%" }}>
-                <thead className="thead-dark">
+                <thead className="table-primary">
                     <tr>
                         <th>Patient Name</th>
                         <th>Next Appointment</th>
@@ -87,7 +87,7 @@ export default function Allappointment() {
                         <th>Doctor Name</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-warning">
                     {bookappointments.map(book => (
                         <tr key={book._id}>
                             <td>{book.Patientname}</td>

@@ -60,7 +60,7 @@ export default function Patienthistory() {
         <div className="text-center">
             <h2 className="mb-3">Appointments</h2>
             <table className="table table-bordered mx-auto" style={{ width: '90%', marginTop: '20px' }}>
-                <thead>
+                <thead className="table-danger">
                     <tr>
                         <th>Last Appointment</th>
                         <th>Next Appointment</th>
@@ -70,7 +70,7 @@ export default function Patienthistory() {
                         <th>Patient Name</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-success">
                     {appointments.map(appointment => (
                         <tr key={appointment._id}>
                             <td>{appointment.Lastappointment}</td>
@@ -86,14 +86,14 @@ export default function Patienthistory() {
 
             <h2 className="mb-4 mt-5">Prescriptions</h2>
             <table className="table table-bordered mx-auto" style={{ width: '60%' }}>
-                <thead>
+                <thead className="table-warning">
                     <tr>
                         <th>Patient Name</th>
                         <th>Medicine</th>
                         <th>Dosage</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-active">
                     {prescriptions.map(prescription => (
                         <tr key={prescription._id}>
                             <td>{prescription.patientName}</td>

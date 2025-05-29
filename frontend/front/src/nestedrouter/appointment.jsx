@@ -42,8 +42,8 @@ export default function Appointment() {
     return (
         <div className="text-center">
             <h2 className="mb-3">Appointments</h2>
-            <table className="table table-bordered mx-auto" style={{ width: '90%', marginTop: '20px' }}>
-                <thead>
+            <table className="table table-bordered mx-auto " style={{ width: '90%', marginTop: '20px' }}>
+                <thead className="table-primary">
                     <tr>
                         <th>Next Appointment</th>
                         <th>Last Appointment</th>
@@ -53,7 +53,7 @@ export default function Appointment() {
                         <th>Patient Name</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-success">
                     {appointments.map(appointment => (
                         <tr key={appointment._id}>
                             <td>{appointment.Nextappointment}</td>

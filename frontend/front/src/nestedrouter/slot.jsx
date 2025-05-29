@@ -43,7 +43,7 @@ export default function Slot() {
         <div className="text-center">
             <h2 className="mb-3">Book Appointments</h2>
             <table className="table table-bordered mx-auto" style={{ width: "90%" }}>
-                <thead className="thead-dark">
+                <thead className="table-info">
                     <tr>
                         <th>Start Time</th>
                         <th>End Time</th>
@@ -53,7 +53,7 @@ export default function Slot() {
                         <th>Available Date</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-success">
                     {slots.map(slot => (
                         <tr key={slot._id}>
                             <td>{slot.Starttime}</td>

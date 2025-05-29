@@ -29,14 +29,14 @@ export default function Bill() {
         <div className="text-center">
             <h2 className="mb-3">Billing Reports</h2>
             <table className="table table-bordered mx-auto" style={{ width: "80%" }}>
-                <thead className="thead-dark">
+                <thead className="table-primary">
                     <tr>
                         <th>Patient Name</th>
                         <th>Amount</th>
                         <th>Payment Status</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-active">
                     {bills.map(bill => (
                         <tr key={bill._id}>
                             <td>{bill.Patientname}</td>

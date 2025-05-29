@@ -36,14 +36,14 @@ export default function Patientprescription() {
         <div className="text-center">
             <h2 className="mb-4">Prescriptions</h2>
             <table className="table table-bordered mx-auto" style={{ width: "80%" }}>
-                <thead className="thead-dark">
+                <thead className="table-danger">
                     <tr>
                         <th>Patient Name</th>
                         <th>Medicine</th>
                         <th>Dosage</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-success">
                     {prescriptions.map(prescription => (
                         <tr key={prescription._id}>
                             <td>{prescription.patientName}</td>

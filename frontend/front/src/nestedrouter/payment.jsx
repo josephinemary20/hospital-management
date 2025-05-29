@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import '../../src/nestedrouter/style.css'
 
 export default function Payment() {
     const [lastAmount, setLastAmount] = useState(null);
@@ -27,21 +28,24 @@ export default function Payment() {
     };
 
     return (
-        <div className="text-center">
-            <div className="mb-3">
-                <h2>PAYMENT PROCESS</h2>
+        <div className="text-center" class="money">
+            <div className="text-center">
+                <div >
+                    <h2>PAYMENT PROCESS</h2>
+                </div>
+                <div className="mb-3">
+                    <h3>Dear patient, your payment is</h3>
+                </div>
+                <div className="mb-3">
+                    {lastAmount !== null ? (
+                        <button onClick={handleClick}>{lastAmount}</button>
+                    ) : (
+                        <p>Loading amount...</p>
+                    )}
+                </div>
+                <Link to="/patientdashbord">GO BACK</Link>
             </div>
-            <div className="mb-3">
-                <h3>Dear patient, your payment is</h3>
-            </div>
-            <div className="mb-3">
-                {lastAmount !== null ? (
-                    <button onClick={handleClick}>{lastAmount}</button>
-                ) : (
-                    <p>Loading amount...</p>
-                )}
-            </div>
-            <Link to="/patientdashbord">GO BACK</Link>
         </div>
+
     );
 }

@@ -24,7 +24,7 @@ export default function Doctordashbord() {
             </div>
 
             <div className="mt-3">
-                <Link to={'/prescription'}>ADD PRESCRIPTION TO PATIENT</Link>
+                <Link to={'/prescription'}> DOCTOR VIEW ADDED PATIENT PRESCRIPTION </Link>
             </div>
 
             <div className="mt-3">

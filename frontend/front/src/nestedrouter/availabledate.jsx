@@ -36,13 +36,13 @@ export default function Availabledate() {
         <div className="text-center">
             <h1 className="mb-4">Doctor Available Dates</h1>
             <table className="table table-bordered mx-auto w-auto">
-                <thead>
+                <thead className="table-primary">
                     <tr>
                         <th>Doctor Name</th>
                         <th>Available Date</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-danger">
                     {slots.map((slot) => (
                         <tr key={slot._id}>
                             <td>{slot.doctorName}</td>

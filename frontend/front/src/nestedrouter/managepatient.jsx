@@ -45,7 +45,7 @@ export default function Managepatient() {
         <div className="text-center">
             <h2 className="mb-3">Manage Patient History</h2>
             <table className="table table-bordered mx-auto" style={{ width: "90%" }}>
-                <thead className="thead-dark">
+                <thead className="table-danger">
                     <tr>
                         <th>Patient Name</th>
                         <th>Last Appointment</th>
@@ -54,7 +54,7 @@ export default function Managepatient() {
                         <th>Doctor Name</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-warning">
                     {appointments.map(appointment => (
                         <tr key={appointment._id}>
                             <td>{appointment.patientName}</td>

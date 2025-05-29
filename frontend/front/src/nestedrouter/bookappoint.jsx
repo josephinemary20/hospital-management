@@ -45,7 +45,7 @@ export default function Bookappoint() {
             <h2 >Conform Patient Appointment</h2>
             {lastAppointment ? (
                 <table className="table mx-auto" style={{ width: "80%" }}>
-                    <thead>
+                    <thead className="table-danger">
                         <tr>
                             <th>Patient Name</th>
                             <th>Next Appointment</th>
@@ -53,7 +53,7 @@ export default function Bookappoint() {
                             <th>Doctor Name</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="table-primary">
                         <tr>
                             <td>{lastAppointment.Patientname}</td>
                             <td>{lastAppointment.Nextappointment}</td>
