@@ -8,13 +8,13 @@ export default function Home() {
                 <h1 className="text-warning">WELCOME TO ASHIQ HOSPITAL</h1>
             </div>
             <div className="mt-5">
-                <button className=" btn bg-danger " onClick={() => navigate('/doctor')} >doctorsignup</button>
+                <button className=" btn bg-danger " onClick={() => navigate('/doctor')} >doctor signup</button>
             </div>
             <div className="mt-5">
-                <button className=" btn bg-danger " onClick={() => navigate('/patient')} >Patientsignup</button>
+                <button className=" btn bg-danger " onClick={() => navigate('/patient')} >Patient signup</button>
             </div>
             <div className="mt-5">
-                <button className=" btn bg-danger " onClick={() => navigate('/admin')} >Adminsignup</button>
+                <button className=" btn bg-danger " onClick={() => navigate('/admin')} >Admin signup</button>
             </div>
         </div>
     </div>

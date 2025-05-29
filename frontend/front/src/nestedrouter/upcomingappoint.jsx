@@ -53,6 +53,10 @@ export default function Upcomingappoint() {
             <div >
                 <h3 className="text-primary">Appointment Form</h3>
             </div>
+            <div className="d-flex justify-content-end">
+                <button className="btn btn-primary">View PDF</button>
+            </div>
+
             <form onSubmit={Submit}>
                 <div className="mt-3">
                     <label className="text-info">Nextappointment</label><br />
