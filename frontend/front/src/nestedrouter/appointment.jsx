@@ -61,8 +61,8 @@ export default function Appointment() {
                     <view>
                         {data.map((item, idx) => <View style={styles.tableRow} key={idx}>
 
-                            <View style={styles.tableCol}><Text style={styles.tableCell}>{item.patientname}</Text></View>
-                            <View style={styles.tableCol}><Text style={styles.tableCell}>{item.doctorname}</Text></View>
+                            <View style={styles.tableCol}><Text style={styles.tableCell}>{item.patientName}</Text></View>
+                            <View style={styles.tableCol}><Text style={styles.tableCell}>{item.doctorName}</Text></View>
                             <View style={styles.tableCol}><Text style={styles.tableCell}>{item.Lastappointment}</Text></View>
                             <View style={styles.tableCol}><Text style={styles.tableCell}>{item.Nextappointment}</Text></View>
                             <View style={styles.tableCol}><Text style={styles.tableCell}>{item.Time}</Text></View>
