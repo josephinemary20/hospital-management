@@ -1,11 +1,11 @@
 
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 import { useState } from "react"
 import { useEffect } from "react"
 import axios from 'axios'
 import axiosInstance from "../axiosinstance/axiosinstance"
 import '../../src/nestedrouter/style.css'
-import { Page, Text, View, Document, StyleSheet, pdf } from '@react-pdf/renderer';
+
 
 
 export default function Upcomingappoint() {
@@ -18,6 +18,7 @@ export default function Upcomingappoint() {
     const [patientlist, setPatientlist] = useState([])
     const [doctor_id, setDoctor_id] = useState()
     const [doctorlist, setDoctorlist] = useState([])
+
 
     const createAppoint = () => {
         axiosInstance.post('http://localhost:2000/appoint', { Lastappointment, Nextappointment, Time, Reason, patient_id, doctor_id }).then(res => {
@@ -38,35 +39,10 @@ export default function Upcomingappoint() {
             })
 
     }
-    const styles = StyleSheet.create({
-        page: {
-            flexDirection: 'row',
-            backgroundColor: '#E4E4E4'
-        },
-        section: {
-            margin: 10,
-            padding: 10,
-            flexGrow: 1
-        }
-    });
 
-    const MyDocument = ({ content }) => (
-        <Document>
-            <Page size="A4" style={styles.page}>
-                <Text>sherine</Text>
-            </Page>
-        </Document>
-    );
-    const GeneratePDF = async () => {
-        const blob = await pdf(<MyDocument />).toBlob();
 
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'example.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    };
+
+
 
     useEffect(() => {
         getdoctor();
@@ -83,9 +59,7 @@ export default function Upcomingappoint() {
             <div >
                 <h3 className="text-primary">Appointment Form</h3>
             </div>
-            <div className="d-flex justify-content-end">
-                <button className="btn btn-primary" onClick={GeneratePDF}>View PDF</button>
-            </div>
+
 
             <form onSubmit={Submit}>
                 <div className="mt-3">

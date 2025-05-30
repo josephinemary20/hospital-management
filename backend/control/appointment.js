@@ -18,6 +18,19 @@ router.get('/appoint_get', async (req, res) => {
     res.json(appoinment)
 })
 
+router.get('/appoint/:patient_id', async (req, res) => {
+    const patient = req.params.patient_id;
+    const get = await AppointmentModel.find({ patient_id: patient }).populate('patient_id')
+    res.json(get)
+})
+
+router.get('/appoint/:doctor_id', async (req, res) => {
+    const doctor = req.params.doctor_id;
+    const get = await AppointmentModel.find({ doctor_id: doctor }).populate('doctor_id')
+    res.json(get)
+})
+
+
 
 
 
