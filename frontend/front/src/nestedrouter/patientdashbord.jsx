@@ -16,15 +16,8 @@ export default function Patientdashbord() {
             </div>
 
             <div className="mt-3">
-                <Link to={'/bookappoint'}>VIEW PATIENT APPOINTMENT HISTORY</Link>
-            </div>
-            <div className="mt-3">
                 <button className="btn btn-secondary" onClick={() => navigate('/paybill')}>prescription form</button>
             </div>
-            <div className="mt-3">
-                <Link to={'/patientprescription'}>VIEW PRESCRIPTION</Link>
-            </div>
-
             <div className="mt-3">
                 <Link to={'/payment'}>PAY BILLS</Link>
             </div>

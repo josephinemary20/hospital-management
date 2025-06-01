@@ -10,10 +10,6 @@ export default function Appointmentdashbord() {
             <div >
                 <button className="btn btn-secondary" onClick={() => navigate('/assigndoctorappoint')}>Admin Booking Doctor Page</button>
             </div>
-
-            <div className="mt-3">
-                <Link to={'/slot'}>VIEW DOCTOR APPOINTMENT</Link>
-            </div>
             <div className="mt-3">
                 <Link to={'/availabledate'}>DOCTOR AVAILABLE DATE</Link>
             </div>

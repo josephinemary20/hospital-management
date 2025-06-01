@@ -2,20 +2,20 @@ import { useState } from "react"
 import { useEffect } from "react"
 import axios from 'axios'
 import axiosInstance from "../axiosinstance/axiosinstance"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import '../../src/nestedrouter/style.css'
 
 export default function Addprescription() {
 
-    const PresClick = () => {
-        alert(" Patient prescription Added.");
-    };
+
 
     // prescription
     const [Medicine, setMedicine] = useState('')
     const [Dosage, setDosage] = useState('')
     const [patient_id, setPatient_id] = useState()
     const [patientlist, setPatientlist] = useState([])
+
+    let navigate = useNavigate()
 
     const createPres = () => {
         axiosInstance.post('http://localhost:2000/pres', { Medicine, Dosage, patient_id }).then(res => {
@@ -64,7 +64,7 @@ export default function Addprescription() {
                 </div>
 
                 <div className="mt-3">
-                    <button onClick={PresClick}>submit</button>
+                    <button onClick={() => navigate('/prescription')}>submit</button>
                 </div>
                 <div className="mt-3">
                     <Link to={'/doctordashbord'}>GO BACK</Link>

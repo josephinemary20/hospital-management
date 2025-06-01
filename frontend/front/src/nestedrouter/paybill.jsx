@@ -1,4 +1,4 @@
-import { Link, } from "react-router-dom";
+import { Link, useNavigate, } from "react-router-dom";
 import { useState, } from "react";
 import axiosInstance from "../axiosinstance/axiosinstance"
 import '../../src/nestedrouter/style.css'
@@ -10,9 +10,7 @@ export default function Paybill() {
     const [Paymentstatus, setPaymentstatus] = useState('')
     const [Patientname, setPatientname] = useState('')
 
-    const Bill = () => {
-        alert(" Your payment is successfully .");
-    };
+    let navigate = useNavigate();
 
     const createbill = () => {
         axiosInstance.post('http://localhost:2000/bill', { Amount, Paymentstatus, Patientname }).then(res => {
@@ -42,7 +40,7 @@ export default function Paybill() {
                     <input onChange={e => setPaymentstatus(e.target.value)} value={Paymentstatus || ''} placeholder="Paymentstatus" />
                 </div>
                 <div className="mt-3">
-                    <button onClick={Bill}>submit</button>
+                    <button onClick={() => navigate('/patientprescription')}>submit</button>
                 </div>
 
             </form>

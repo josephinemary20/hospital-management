@@ -10,8 +10,6 @@ const PatientSchema = new mongoose.Schema({
             message: props => `${props.value} is not a Patient name!`
         },
         required: [true, 'Patientname is required.']
-
-
     },
     Patientid: {
         type: String,

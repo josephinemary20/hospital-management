@@ -1,5 +1,5 @@
 
-import { data, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react"
 import { useEffect } from "react"
 import axios from 'axios'
@@ -18,6 +18,8 @@ export default function Upcomingappoint() {
     const [patientlist, setPatientlist] = useState([])
     const [doctor_id, setDoctor_id] = useState()
     const [doctorlist, setDoctorlist] = useState([])
+
+    let navigate = useNavigate();
 
 
     const createAppoint = () => {
@@ -39,10 +41,6 @@ export default function Upcomingappoint() {
             })
 
     }
-
-
-
-
 
     useEffect(() => {
         getdoctor();
@@ -99,7 +97,7 @@ export default function Upcomingappoint() {
                     </select>
                 </div>
                 <div className="mt-3">
-                    <button onSubmit={Submit}>submit</button>
+                    <button onSubmit={Submit} onClick={() => navigate('/appointment')} >submit</button>
                 </div>
             </form>
             <div className="mt-3">

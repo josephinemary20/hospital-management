@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from 'axios'
 import axiosInstance from "../axiosinstance/axiosinstance"
@@ -12,10 +12,7 @@ export default function Patientappoint() {
     const [doctor_id, setDoctor_id] = useState()
     const [doctorlist, setDoctorlist] = useState([])
 
-    const Click = () => {
-        alert(" Your appointment successfully Register.");
-    };
-
+    let navigate = useNavigate();
 
     const Bookappoint = () => {
         axiosInstance.post('http://localhost:2000/book', { Nextappointment, Time, doctor_id, Patientname }).then(res => {
@@ -70,7 +67,7 @@ export default function Patientappoint() {
                     </select>
                 </div>
                 <div className="mt-3">
-                    <button onClick={Click}>submit</button>
+                    <button onClick={() => navigate('/bookappoint')}>submit</button>
                 </div>
                 <div className="mt-3">
                     <Link to={'/patientdashbord'}>GO BACK</Link>

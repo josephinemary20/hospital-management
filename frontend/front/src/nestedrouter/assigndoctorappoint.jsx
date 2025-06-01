@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import axiosInstance from "../axiosinstance/axiosinstance"
@@ -6,9 +6,6 @@ import '../../src/nestedrouter/style.css'
 
 
 export default function Assigndoctorappoint() {
-    const Click = () => {
-        alert(" Admin booked doctor page.");
-    };
 
 
     const [Starttime, setStarttime] = useState('')
@@ -19,6 +16,8 @@ export default function Assigndoctorappoint() {
     const [doctorlist, setDoctorlist] = useState([])
     const [department_id, setDepartment_id] = useState()
     const [departmentlist, setDepartmentlist] = useState([])
+
+    let navigate = useNavigate();
 
     const Bookpage = () => {
         axiosInstance.post('http://localhost:2000/slot', { Starttime, Endtime, Slotduration, Availabledate, doctor_id, department_id }).then(res => {
@@ -90,7 +89,7 @@ export default function Assigndoctorappoint() {
                     </select>
                 </div>
                 <div className="mt-3">
-                    <button onClick={Click}>Submit</button>
+                    <button onClick={() => navigate('/slot')}>Submit</button>
                 </div>
 
             </form>
