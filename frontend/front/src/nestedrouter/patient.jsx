@@ -35,10 +35,10 @@ export default function Patient() {
                     <h3>PATIENT SIGNUP</h3>
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" />
+                    <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" required />
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setPatientid(e.target.value)} value={Patientid || ''} placeholder="Patientid" />
+                    <input onChange={e => setPatientid(e.target.value)} value={Patientid || ''} placeholder="Patientid" required />
                 </div>
                 <div className="mt-3">
                     <button onClick={patientsignup} >SIGNUP</button>

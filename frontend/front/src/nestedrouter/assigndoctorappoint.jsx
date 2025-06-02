@@ -56,17 +56,17 @@ export default function Assigndoctorappoint() {
             </div>
             <form onSubmit={Submit}>
                 <div className="mt-3">
-                    <input onChange={e => setStarttime(e.target.value)} value={Starttime || ''} placeholder="Starttime" />
+                    <input onChange={e => setStarttime(e.target.value)} value={Starttime || ''} placeholder="Starttime" required />
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setEndtime(e.target.value)} value={Endtime || ''} placeholder="Endtime" />
+                    <input onChange={e => setEndtime(e.target.value)} value={Endtime || ''} placeholder="Endtime" required />
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setSlotduration(e.target.value)} value={Slotduration || ''} placeholder="Slotduration" />
+                    <input onChange={e => setSlotduration(e.target.value)} value={Slotduration || ''} placeholder="Slotduration" required />
                 </div>
                 <div className="mt-3">
                     <label>Availabledate</label><br />
-                    <input onChange={e => setAvailabledate(e.target.value)} value={Availabledate || ''} type="Date" />
+                    <input onChange={e => setAvailabledate(e.target.value)} value={Availabledate || ''} type="Date" required />
                 </div>
                 <div className="mt-3">
                     <select onChange={e => setDoctor_id(e.target.value)} value={doctor_id} >

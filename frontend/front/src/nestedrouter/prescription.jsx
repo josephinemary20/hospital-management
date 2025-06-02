@@ -3,27 +3,36 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Prescription() {
-    const [prescriptions, setPrescriptions] = useState([]);
+    const [lastPrescription, setLastPrescription] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [prescriptiondetails, patientsdetails] = await Promise.all([
-                    axios.get('http://localhost:2000/pres_get'),
-                    axios.get('http://localhost:2000/patient_get'),
+                const [prescriptionResponse, patientResponse] = await Promise.all([
+                    axios.get("http://localhost:2000/pres_get"),
+                    axios.get("http://localhost:2000/patient_get"),
                 ]);
 
+                const prescriptions = prescriptionResponse.data;
+                const patients = patientResponse.data;
+
+                if (prescriptions.length === 0) {
+                    setLastPrescription(null);
+                    return;
+                }
+
+                // Create a map of patient IDs to patient names
                 const patientMap = {};
-                patientsdetails.data.forEach(patient => {
+                patients.forEach((patient) => {
                     patientMap[patient._id] = patient.Patientname;
                 });
 
-                const fetchedPrescription = prescriptiondetails.data.map(prescription => ({
-                    ...prescription,
-                    patientName: patientMap[prescription.patient_id] || 'Unknown Patient',
-                }));
+                // Get the most recent prescription
+                const latestPrescription = prescriptions[prescriptions.length - 1];
+                latestPrescription.patientName =
+                    patientMap[latestPrescription.patient_id] || "Unknown Patient";
 
-                setPrescriptions(fetchedPrescription);
+                setLastPrescription(latestPrescription);
             } catch (error) {
                 console.error("Error fetching prescription data:", error);
             }
@@ -34,26 +43,31 @@ export default function Prescription() {
 
     return (
         <div className="text-center">
-            <h2 className="mb-4">Prescriptions</h2>
-            <table className="table table-bordered mx-auto" style={{ width: '80%', marginTop: '20px' }}>
-                <thead className="table-danger">
-                    <tr>
-                        <th>Patient Name</th>
-                        <th>Medicine</th>
-                        <th>Dosage</th>
-                    </tr>
-                </thead>
-                <tbody className="table-info">
-                    {prescriptions.map(prescription => (
-                        <tr key={prescription._id}>
-                            <td>{prescription.patientName}</td>
-                            <td>{prescription.Medicine}</td>
-                            <td>{prescription.Dosage}</td>
+            <h2 className="mb-4">Latest Prescription</h2>
+            {lastPrescription ? (
+                <table
+                    className="table table-bordered mx-auto"
+                    style={{ width: "80%", marginTop: "20px" }}
+                >
+                    <thead className="table-danger">
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Medicine</th>
+                            <th>Dosage</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            <Link to={'/doctordashbord'}>GO BACK</Link>
+                    </thead>
+                    <tbody className="table-info">
+                        <tr>
+                            <td>{lastPrescription.patientName}</td>
+                            <td>{lastPrescription.Medicine}</td>
+                            <td>{lastPrescription.Dosage}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            ) : (
+                <p>No prescription data available.</p>
+            )}
+            <Link to="/doctordashbord">GO BACK</Link>
         </div>
     );
 }

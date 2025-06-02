@@ -8,19 +8,15 @@ export default function Patientprescription() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [prescriptiondetails, patientsdetails] = await Promise.all([
+                const [prescriptiondetails] = await Promise.all([
                     axios.get('http://localhost:2000/pres_get'),
-                    axios.get('http://localhost:2000/patient_get'),
+
                 ]);
 
-                const patientMap = {};
-                patientsdetails.data.forEach(patient => {
-                    patientMap[patient._id] = patient.Patientname;
-                });
 
                 const fetchedPrescription = prescriptiondetails.data.map(prescription => ({
                     ...prescription,
-                    patientName: patientMap[prescription.patient_id] || 'Unknown Patient',
+
                 }));
 
                 setPrescriptions(fetchedPrescription);
@@ -38,7 +34,7 @@ export default function Patientprescription() {
             <table className="table table-bordered mx-auto" style={{ width: "80%" }}>
                 <thead className="table-danger">
                     <tr>
-                        <th>Patient Name</th>
+
                         <th>Medicine</th>
                         <th>Dosage</th>
                     </tr>
@@ -46,7 +42,6 @@ export default function Patientprescription() {
                 <tbody className="table-success">
                     {prescriptions.map(prescription => (
                         <tr key={prescription._id}>
-                            <td>{prescription.patientName}</td>
                             <td>{prescription.Medicine}</td>
                             <td>{prescription.Dosage}</td>
                         </tr>

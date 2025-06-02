@@ -27,20 +27,20 @@ export default function Paybill() {
     return <div className="text-center" class="prescription">
         <div className="text-center">
             <div >
-                <h3>PRESCRIPTION FORM</h3>
+                <h3>PAYMENT FORM</h3>
             </div>
             <form onClick={Submitbill}>
                 <div className="mt-3">
-                    <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" />
+                    <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" required />
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setAmount(e.target.value)} value={Amount || ''} placeholder="Amount" />
+                    <input onChange={e => setAmount(e.target.value)} value={Amount || ''} placeholder="Amount" required />
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setPaymentstatus(e.target.value)} value={Paymentstatus || ''} placeholder="Paymentstatus" />
+                    <input onChange={e => setPaymentstatus(e.target.value)} value={Paymentstatus || ''} placeholder="Paymentstatus" required />
                 </div>
                 <div className="mt-3">
-                    <button onClick={() => navigate('/patientprescription')}>submit</button>
+                    <button onClick={() => navigate('/payment')}>submit</button>
                 </div>
 
             </form>

@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import '../../src/nestedrouter/style.css'
+import Swal from 'sweetalert2';
+import '../../src/nestedrouter/style.css';
 
 export default function Payment() {
     const [lastAmount, setLastAmount] = useState(null);
@@ -12,7 +13,7 @@ export default function Payment() {
                 const response = await axios.get("http://localhost:2000/bill_get");
                 const bills = response.data;
                 if (bills.length > 0) {
-                    const latestBill = bills[bills.length - 1]; // get last bill
+                    const latestBill = bills[bills.length - 1];
                     setLastAmount(latestBill.Amount);
                 }
             } catch (error) {
@@ -24,13 +25,18 @@ export default function Payment() {
     }, []);
 
     const handleClick = () => {
-        alert(`Your payment of ${lastAmount} has been processed successfully.`);
+        Swal.fire({
+            title: 'Payment Successful',
+            text: `Your payment of ₹${lastAmount} has been processed successfully.`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
     };
 
     return (
-        <div className="text-center" class="money">
+        <div className="text-center money">
             <div className="text-center">
-                <div >
+                <div>
                     <h2>PAYMENT PROCESS</h2>
                 </div>
                 <div className="mb-3">
@@ -46,6 +52,5 @@ export default function Payment() {
                 <Link to="/patientdashbord">GO BACK</Link>
             </div>
         </div>
-
     );
 }

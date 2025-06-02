@@ -44,15 +44,15 @@ export default function Patientappoint() {
             </div>
             <form onSubmit={Submit}>
                 <div className="mt-3">
-                    <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" />
+                    <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" required />
                 </div>
 
                 <div className="mt-3">
                     <label>Nextappointment</label><br />
-                    <input onChange={e => setNextappointment(e.target.value)} type="Date" value={Nextappointment || ''} />
+                    <input onChange={e => setNextappointment(e.target.value)} type="Date" value={Nextappointment || ''} required />
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setTime(e.target.value)} value={Time || ''} placeholder="Time" />
+                    <input onChange={e => setTime(e.target.value)} value={Time || ''} placeholder="Time" required />
                 </div>
 
 

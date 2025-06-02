@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import '../../src/nestedrouter/style.css'
 
+
 export default function Admindashbord() {
 
     let navigate = useNavigate();

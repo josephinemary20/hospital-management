@@ -2,23 +2,13 @@ const mongoose = require('mongoose')
 const PrescriptionSchema = new mongoose.Schema({
     Medicine: {
         type: String,
-        validate: {
-            validator: function (val) {
-                return /^[a-zA-Z\s]+$/.test(val);
-            },
-            message: props => `${props.value} is not a Medicine!`
-        },
-        required: [true, 'Medicine is required.']
+        match: /^[a-zA-Z\s]+$/,
+        required: true
     },
     Dosage: {
         type: String,
-        validate: {
-            validator: function (val) {
-                return /^[a-zA-Z\s]+$/.test(val);
-            },
-            message: props => `${props.value} is not a Dosage!`
-        },
-        required: [true, 'Dosage is required.']
+        match: /^\d+[a-zA-Z\s]+$/,
+        required: true
     },
     patient_id: {
         ref: 'patient',

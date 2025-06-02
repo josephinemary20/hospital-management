@@ -2,26 +2,18 @@ const mongoose = require('mongoose')
 const BookappointSchema = new mongoose.Schema({
     Nextappointment: {
         type: Date,
+        match: /^\d{4}-\d{2}-\d{2}$/,
+        required: true
     },
     Time: {
         type: String,
-        validate: {
-            validator: function (val) {
-                return /^(1[0-2]|0?[1-9])(\.[0-5][0-9])?\s?(am|pm)$/i.test(val);
-            },
-            message: props => `${props.value} is not Time!`
-        },
-        required: [true, 'Time is required.']
+        match: /^(1[0-2]|0?[1-9])(\.[0-5][0-9])?\s?(am|pm)$/i,
+        required: true
     },
     Patientname: {
         type: String,
-        validate: {
-            validator: function (val) {
-                return /^[a-zA-Z\s]+$/.test(val);
-            },
-            message: props => `${props.value} is not a Patientname!`
-        },
-        required: [true, 'Patientname is required.']
+        match: /^[a-zA-Z\s]+$/,
+        required: true
     },
     doctor_id: {
         ref: "doctor",

@@ -16,24 +16,18 @@ export default function Upcomingappoint() {
     const [Reason, setReason] = useState('')
     const [patient_id, setPatient_id] = useState()
     const [patientlist, setPatientlist] = useState([])
-    const [doctor_id, setDoctor_id] = useState()
-    const [doctorlist, setDoctorlist] = useState([])
+
 
     let navigate = useNavigate();
 
 
     const createAppoint = () => {
-        axiosInstance.post('http://localhost:2000/appoint', { Lastappointment, Nextappointment, Time, Reason, patient_id, doctor_id }).then(res => {
+        axiosInstance.post('http://localhost:2000/appoint', { Lastappointment, Nextappointment, Time, Reason, patient_id }).then(res => {
 
         })
 
     }
-    const getdoctor = () => {
-        axios.get('http://localhost:2000/doctor_get')
-            .then(res => {
-                setDoctorlist(res?.data)
-            })
-    }
+
     const getpatient = () => {
         axios.get('http://localhost:2000/patient_get')
             .then(res => {
@@ -43,7 +37,6 @@ export default function Upcomingappoint() {
     }
 
     useEffect(() => {
-        getdoctor();
         getpatient();
 
     }, [])
@@ -52,6 +45,7 @@ export default function Upcomingappoint() {
         e.preventDefault()
         createAppoint();
     }
+
     return <div className="text-center" class="doctorappointment">
         <div className="text-center">
             <div >
@@ -62,17 +56,17 @@ export default function Upcomingappoint() {
             <form onSubmit={Submit}>
                 <div className="mt-3">
                     <label className="text-info">Nextappointment</label><br />
-                    <input onChange={e => setNextappointment(e.target.value)} type="Date" value={Nextappointment || ''} />
+                    <input onChange={e => setNextappointment(e.target.value)} type="Date" value={Nextappointment || ''} required />
                 </div>
                 <div className="mt-3">
                     <label className="text-info">Lastappointment</label><br />
-                    <input onChange={e => setLastappointment(e.target.value)} type="Date" value={Lastappointment || ''} />
+                    <input onChange={e => setLastappointment(e.target.value)} type="Date" value={Lastappointment || ''} required />
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setTime(e.target.value)} value={Time || ''} placeholder="Time" />
+                    <input onChange={e => setTime(e.target.value)} value={Time || ''} placeholder="Time" required />
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setReason(e.target.value)} value={Reason || ''} placeholder="Reason" />
+                    <input onChange={e => setReason(e.target.value)} value={Reason || ''} placeholder="Reason" required />
                 </div>
 
                 <div className="mt-3">
@@ -81,17 +75,6 @@ export default function Upcomingappoint() {
 
                         {
                             patientlist.map((patient) => <option key={patient._id} value={patient._id}>{patient.Patientname}</option>)
-                        }
-
-                    </select>
-                </div>
-
-                <div className="mt-3">
-                    <select onChange={e => setDoctor_id(e.target.value)} value={doctor_id} >
-                        <option>select doctorname</option>
-
-                        {
-                            doctorlist?.map((doctor) => <option key={doctor._id} value={doctor._id}>{doctor.Doctorname}</option>)
                         }
 
                     </select>

@@ -32,10 +32,10 @@ export default function Admin() {
                     <h3>ADMIN SIGNUP</h3>
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setAdminname(e.target.value)} value={Adminname || ''} placeholder="Adminname" />
+                    <input onChange={e => setAdminname(e.target.value)} value={Adminname || ''} placeholder="Adminname" required />
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setAdminid(e.target.value)} value={Adminid || ''} placeholder="Adminid" />
+                    <input onChange={e => setAdminid(e.target.value)} value={Adminid || ''} placeholder="Adminid" required />
 
                 </div>
                 <div className="mt-3">

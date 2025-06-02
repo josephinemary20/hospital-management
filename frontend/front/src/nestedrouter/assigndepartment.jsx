@@ -2,11 +2,20 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import '../../src/nestedrouter/style.css'
+import Swal from 'sweetalert2';
+import axiosInstance from "../axiosinstance/axiosinstance";
+
 
 export default function Assigndepartment() {
     const Click = () => {
-        alert(" Doctor department added.");
+        Swal.fire({
+
+            text: `Assign doctor department successfully.`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
     };
+
     const [doctor_id, setDoctor_id] = useState()
     const [doctorlist, setDoctorlist] = useState([])
     const [department_id, setDepartment_id] = useState()

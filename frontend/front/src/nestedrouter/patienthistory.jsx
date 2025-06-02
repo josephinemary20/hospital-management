@@ -3,51 +3,42 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Patienthistory() {
-    const [appointments, setAppointments] = useState([]);
-    const [prescriptions, setPrescriptions] = useState([]);
-    const [patientsMap, setPatientsMap] = useState({});
-    const [doctorsMap, setDoctorsMap] = useState({});
+    const [latestAppointment, setLatestAppointment] = useState(null);
+    const [latestPrescription, setLatestPrescription] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [
-                    appointmentsRes,
-                    prescriptionsRes,
-                    patientsRes,
-                    doctorsRes
-                ] = await Promise.all([
+
+                const [appointmentsRes, prescriptionsRes, patientsRes] = await Promise.all([
                     axios.get("http://localhost:2000/appoint_get"),
                     axios.get("http://localhost:2000/pres_get"),
                     axios.get("http://localhost:2000/patient_get"),
-                    axios.get("http://localhost:2000/doctor_get")
                 ]);
 
+                const appointments = appointmentsRes.data;
+                const prescriptions = prescriptionsRes.data;
+                const patients = patientsRes.data;
+
+
                 const patientMap = {};
-                patientsRes.data.forEach(patient => {
+                patients.forEach((patient) => {
                     patientMap[patient._id] = patient.Patientname;
                 });
 
-                const doctorMap = {};
-                doctorsRes.data.forEach(doctor => {
-                    doctorMap[doctor._id] = doctor.Doctorname;
-                });
 
-                const mappedAppointments = appointmentsRes.data.map(app => ({
-                    ...app,
-                    doctorName: doctorMap[app.doctor_id] || "Unknown Doctor",
-                    patientName: patientMap[app.patient_id] || "Unknown Patient"
-                }));
+                if (appointments.length > 0) {
+                    const latestApp = appointments[appointments.length - 1];
+                    latestApp.patientName = patientMap[latestApp.patient_id] || "Unknown Patient";
+                    setLatestAppointment(latestApp);
+                }
 
-                const mappedPrescriptions = prescriptionsRes.data.map(pres => ({
-                    ...pres,
-                    patientName: patientMap[pres.patient_id] || "Unknown Patient"
-                }));
 
-                setDoctorsMap(doctorMap);
-                setPatientsMap(patientMap);
-                setAppointments(mappedAppointments);
-                setPrescriptions(mappedPrescriptions);
+                if (prescriptions.length > 0) {
+                    const latestPres = prescriptions[prescriptions.length - 1];
+                    latestPres.patientName = patientMap[latestPres.patient_id] || "Unknown Patient";
+                    setLatestPrescription(latestPres);
+                }
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -58,51 +49,59 @@ export default function Patienthistory() {
 
     return (
         <div className="text-center">
-            <h2 className="mb-3">Appointments</h2>
-            <table className="table table-bordered mx-auto" style={{ width: '90%', marginTop: '20px' }}>
-                <thead className="table-danger">
-                    <tr>
-                        <th>Last Appointment</th>
-                        <th>Next Appointment</th>
-                        <th>Time</th>
-                        <th>Reason</th>
-                        <th>Doctor Name</th>
-                        <th>Patient Name</th>
-                    </tr>
-                </thead>
-                <tbody className="table-success">
-                    {appointments.map(appointment => (
-                        <tr key={appointment._id}>
-                            <td>{appointment.Lastappointment}</td>
-                            <td>{appointment.Nextappointment}</td>
-                            <td>{appointment.Time}</td>
-                            <td>{appointment.Reason}</td>
-                            <td>{appointment.doctorName}</td>
-                            <td>{appointment.patientName}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <h2 className="mb-4">Latest Appointment & Prescription</h2>
 
-            <h2 className="mb-4 mt-5">Prescriptions</h2>
-            <table className="table table-bordered mx-auto" style={{ width: '60%' }}>
-                <thead className="table-warning">
-                    <tr>
-                        <th>Patient Name</th>
-                        <th>Medicine</th>
-                        <th>Dosage</th>
-                    </tr>
-                </thead>
-                <tbody className="table-active">
-                    {prescriptions.map(prescription => (
-                        <tr key={prescription._id}>
-                            <td>{prescription.patientName}</td>
-                            <td>{prescription.Medicine}</td>
-                            <td>{prescription.Dosage}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {latestAppointment ? (
+                <div className="mb-5">
+                    <h4>Latest Appointment</h4>
+                    <table className="table table-bordered mx-auto" style={{ width: "80%", marginTop: "20px" }}>
+                        <thead className="table-primary">
+                            <tr>
+                                <th>Next Appointment</th>
+                                <th>Last Appointment</th>
+                                <th>Time</th>
+                                <th>Reason</th>
+                                <th>Patient Name</th>
+                            </tr>
+                        </thead>
+                        <tbody className="table-success">
+                            <tr>
+                                <td>{latestAppointment.Nextappointment}</td>
+                                <td>{latestAppointment.Lastappointment}</td>
+                                <td>{latestAppointment.Time}</td>
+                                <td>{latestAppointment.Reason}</td>
+                                <td>{latestAppointment.patientName}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <p>No appointment data available.</p>
+            )}
+
+            {latestPrescription ? (
+                <div className="mb-5">
+                    <h4>Latest Prescription</h4>
+                    <table className="table table-bordered mx-auto" style={{ width: "80%", marginTop: "20px" }}>
+                        <thead className="table-danger">
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Medicine</th>
+                                <th>Dosage</th>
+                            </tr>
+                        </thead>
+                        <tbody className="table-info">
+                            <tr>
+                                <td>{latestPrescription.patientName}</td>
+                                <td>{latestPrescription.Medicine}</td>
+                                <td>{latestPrescription.Dosage}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <p>No prescription data available.</p>
+            )}
 
             <Link to="/doctordashbord">GO BACK</Link>
         </div>

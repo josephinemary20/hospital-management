@@ -4,25 +4,15 @@ const DoctorSchema = new mongoose.Schema({
 
     Doctorname: {
         type: String,
-        validate: {
-            validator: function (val) {
-                return /^[a-zA-Z\s]+$/.test(val);
-            },
-            message: props => `${props.value} is not a Doctor name!`
-        },
-        required: [true, 'Doctorname is required.']
+        match: /^[a-zA-Z\s]+$/,
+        required: true
 
     },
 
     Doctorid: {
         type: String,
-        validate: {
-            validator: function (val) {
-                return /^DR\d{3}$/.test(val);
-            },
-            message: props => `${props.value} is not a Doctor id!`
-        },
-        required: [true, 'Doctor ID is required.']
+        match: /^DR\d{3}$/,
+        required: true
     }
 });
 

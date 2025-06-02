@@ -16,10 +16,10 @@ export default function Patientdashbord() {
             </div>
 
             <div className="mt-3">
-                <button className="btn btn-secondary" onClick={() => navigate('/paybill')}>prescription form</button>
+                <button className="btn btn-secondary" onClick={() => navigate('/paybill')}>pay bill</button>
             </div>
             <div className="mt-3">
-                <Link to={'/payment'}>PAY BILLS</Link>
+                <Link to={'/patientprescription'}>VIEW PRESCRIPTION</Link>
             </div>
             <div className="mt-3">
                 <button className="btn btn-danger" onClick={logout}>LOGOUT</button>
