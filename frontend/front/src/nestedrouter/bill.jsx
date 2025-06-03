@@ -50,15 +50,15 @@ export default function Bill() {
                 <View style={styles.table}>
                     <View style={styles.tableRow}>
                         <View style={styles.tableColHeader}><Text style={styles.tableCell}>PatientName</Text></View>
-                        <View style={styles.tableColHeader}><Text style={styles.tableCell}>Amount</Text></View>
-                        <View style={styles.tableColHeader}><Text style={styles.tableCell}></Text>Paymentstatus</View>
+                        <View style={styles.tableColHeader}><Text style={styles.tableCell}>Consultationfees</Text></View>
+                        <View style={styles.tableColHeader}><Text style={styles.tableCell}>Paymentstatus</Text></View>
 
                     </View>
                     <view>
                         {data.map((item, idx) => <View style={styles.tableRow} key={idx}>
 
                             <View style={styles.tableCol}><Text style={styles.tableCell}>{item.Patientname}</Text></View>
-                            <View style={styles.tableCol}><Text style={styles.tableCell}>{item.Amount}</Text></View>
+                            <View style={styles.tableCol}><Text style={styles.tableCell}>{item.Consultationfees}</Text></View>
                             <View style={styles.tableCol}><Text style={styles.tableCell}>{item.Paymentstatus}</Text></View>
 
 
@@ -112,7 +112,7 @@ export default function Bill() {
                 <thead className="table-primary">
                     <tr>
                         <th>Patient Name</th>
-                        <th>Amount</th>
+                        <th>Consultationfees</th>
                         <th>Payment Status</th>
                     </tr>
                 </thead>
@@ -120,7 +120,7 @@ export default function Bill() {
                     {bills.map(bill => (
                         <tr key={bill._id}>
                             <td>{bill.Patientname}</td>
-                            <td>{bill.Amount}</td>
+                            <td>{bill.Consultationfees}</td>
                             <td>{bill.Paymentstatus}</td>
                         </tr>
                     ))}

@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
 const BillSchema = new mongoose.Schema({
-    Amount: {
+    Consultationfees: {
         type: String,
-        match: /^Rs\[a-zA-Z\s]+$/,
-        required: true
     },
     Paymentstatus: {
         type: String,

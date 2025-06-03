@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import '../../src/nestedrouter/style.css';
 
 export default function Payment() {
-    const [lastAmount, setLastAmount] = useState(null);
+    const [lastConsultationfees, setLastConsultationfees] = useState(null);
 
     useEffect(() => {
         const fetchLatestAmount = async () => {
@@ -14,10 +14,10 @@ export default function Payment() {
                 const bills = response.data;
                 if (bills.length > 0) {
                     const latestBill = bills[bills.length - 1];
-                    setLastAmount(latestBill.Amount);
+                    setLastConsultationfees(latestBill.Consultationfees);
                 }
             } catch (error) {
-                console.error("Error fetching latest amount:", error);
+                console.error(" latest Consultationfees:", error);
             }
         };
 
@@ -27,7 +27,7 @@ export default function Payment() {
     const handleClick = () => {
         Swal.fire({
             title: 'Payment Successful',
-            text: `Your payment of ₹${lastAmount} has been processed successfully.`,
+            text: `Your payment of ₹${lastConsultationfees} has been processed successfully.`,
             icon: 'success',
             confirmButtonText: 'OK'
         });
@@ -43,8 +43,8 @@ export default function Payment() {
                     <h3>Dear patient, your payment is</h3>
                 </div>
                 <div className="mb-3">
-                    {lastAmount !== null ? (
-                        <button onClick={handleClick}>{lastAmount}</button>
+                    {lastConsultationfees !== null ? (
+                        <button onClick={handleClick}>{lastConsultationfees}</button>
                     ) : (
                         <p>Loading amount...</p>
                     )}

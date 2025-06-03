@@ -59,7 +59,6 @@ export default function Allappointment() {
                         <th>Last Appointment</th>
                         <th>Time</th>
                         <th>Reason</th>
-                        <th>Doctor Name</th>
                         <th>Patient Name</th>
                     </tr>
                 </thead>
@@ -70,7 +69,6 @@ export default function Allappointment() {
                             <td>{appointment.Lastappointment}</td>
                             <td>{appointment.Time}</td>
                             <td>{appointment.Reason}</td>
-                            <td>{appointment.doctorName}</td>
                             <td>{appointment.patientName}</td>
                         </tr>
                     ))}

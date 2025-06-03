@@ -49,11 +49,11 @@ export default function Patienthistory() {
 
     return (
         <div className="text-center">
-            <h2 className="mb-4">Latest Appointment & Prescription</h2>
+            <h2 className="mb-4">Upcoming Appointment & Prescription</h2>
 
             {latestAppointment ? (
                 <div className="mb-5">
-                    <h4>Latest Appointment</h4>
+                    <h4>upcoming Appointment</h4>
                     <table className="table table-bordered mx-auto" style={{ width: "80%", marginTop: "20px" }}>
                         <thead className="table-primary">
                             <tr>
@@ -81,7 +81,7 @@ export default function Patienthistory() {
 
             {latestPrescription ? (
                 <div className="mb-5">
-                    <h4>Latest Prescription</h4>
+                    <h4> Prescription</h4>
                     <table className="table table-bordered mx-auto" style={{ width: "80%", marginTop: "20px" }}>
                         <thead className="table-danger">
                             <tr>

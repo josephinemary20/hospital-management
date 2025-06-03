@@ -51,7 +51,7 @@ export default function Managepatient() {
                         <th>Last Appointment</th>
                         <th>Reason</th>
                         <th>Next Appointment</th>
-                        <th>Doctor Name</th>
+
                     </tr>
                 </thead>
                 <tbody className="table-warning">
@@ -61,7 +61,7 @@ export default function Managepatient() {
                             <td>{appointment.Lastappointment}</td>
                             <td>{appointment.Reason}</td>
                             <td>{appointment.Nextappointment}</td>
-                            <td>{appointment.doctorName}</td>
+
                         </tr>
                     ))}
                 </tbody>

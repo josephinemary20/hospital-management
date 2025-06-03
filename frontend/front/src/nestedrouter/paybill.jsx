@@ -6,14 +6,14 @@ import '../../src/nestedrouter/style.css'
 export default function Paybill() {
 
     // bill
-    const [Amount, setAmount] = useState('')
+    const [Consultationfees, setConsultationfees] = useState('')
     const [Paymentstatus, setPaymentstatus] = useState('')
     const [Patientname, setPatientname] = useState('')
 
     let navigate = useNavigate();
 
     const createbill = () => {
-        axiosInstance.post('http://localhost:2000/bill', { Amount, Paymentstatus, Patientname }).then(res => {
+        axiosInstance.post('http://localhost:2000/bill', { Consultationfees, Paymentstatus, Patientname }).then(res => {
 
         })
     }
@@ -34,7 +34,7 @@ export default function Paybill() {
                     <input onChange={e => setPatientname(e.target.value)} value={Patientname || ''} placeholder="Patientname" required />
                 </div>
                 <div className="mt-3">
-                    <input onChange={e => setAmount(e.target.value)} value={Amount || ''} placeholder="Amount" required />
+                    <input onChange={e => setConsultationfees(e.target.value)} value={Consultationfees || ''} placeholder="Consultationfees" required />
                 </div>
                 <div className="mt-3">
                     <input onChange={e => setPaymentstatus(e.target.value)} value={Paymentstatus || ''} placeholder="Paymentstatus" required />
