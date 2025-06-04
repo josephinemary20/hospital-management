@@ -45,7 +45,7 @@ export default function Doctor() {
                 </div>
 
                 <div className="mt-3">
-                    <button onClick={doctorsignup}>SIGNUP</button>
+                    <button onClick={doctorsignup}>SIGNIN</button>
                 </div>
                 <div className="mt-3">
                     <button onClick={doctorLogin} >LOGIN</button>

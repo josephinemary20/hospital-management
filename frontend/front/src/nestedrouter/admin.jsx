@@ -39,7 +39,7 @@ export default function Admin() {
 
                 </div>
                 <div className="mt-3">
-                    <button onClick={adminsignup}>SIGNUP</button>
+                    <button onClick={adminsignup}>SIGNIN</button>
                 </div>
                 <div className="mt-3">
                     <button onClick={adminLogin}>LOGIN</button>

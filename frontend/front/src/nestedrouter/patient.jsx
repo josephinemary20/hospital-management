@@ -41,7 +41,7 @@ export default function Patient() {
                     <input onChange={e => setPatientid(e.target.value)} value={Patientid || ''} placeholder="Patientid" required />
                 </div>
                 <div className="mt-3">
-                    <button onClick={patientsignup} >SIGNUP</button>
+                    <button onClick={patientsignup} >SIGNIN</button>
                 </div>
                 <div className="mt-3">
                     <button onClick={patientLogin}>LOGIN</button>
